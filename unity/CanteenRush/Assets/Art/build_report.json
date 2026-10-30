@@ -1,0 +1,680 @@
+[
+ {
+  "module": "Item_Donut",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Donut",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 176864,
+    "tris": 1998,
+    "target_tris": 2000,
+    "dims_m": [
+     0.32,
+     0.319,
+     0.14
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Donut.fbx",
+  "seconds": 3.1
+ },
+ {
+  "module": "Item_Cola",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Cola",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 2918,
+    "tris": 795,
+    "target_tris": 800,
+    "dims_m": [
+     0.166,
+     0.166,
+     0.321
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Cola.fbx",
+  "seconds": 0.3
+ },
+ {
+  "module": "Item_Shake",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Shake",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 7576,
+    "tris": 1500,
+    "target_tris": 1500,
+    "dims_m": [
+     0.222,
+     0.223,
+     0.621
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Shake.fbx",
+  "seconds": 0.3
+ },
+ {
+  "module": "Item_Cake",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Cake",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 55452,
+    "tris": 3000,
+    "target_tris": 3000,
+    "dims_m": [
+     0.516,
+     0.494,
+     0.457
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Cake.fbx",
+  "seconds": 0.8
+ },
+ {
+  "module": "Item_Cup",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Cup",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 44,
+    "tris": 44,
+    "target_tris": 300,
+    "dims_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Cup_Water",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 44,
+    "tris": 44,
+    "target_tris": 100,
+    "dims_m": [
+     0.073,
+     0.073,
+     0.006
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Cup.fbx",
+  "seconds": 0.2
+ },
+ {
+  "module": "Prop_Tray",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_Tray",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 60,
+    "tris": 60,
+    "target_tris": 200,
+    "dims_m": [
+     0.45,
+     0.3,
+     0.03
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_Tray.fbx",
+  "seconds": 0.1
+ },
+ {
+  "module": "Prop_TrayRack",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_TrayRack",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 60,
+    "tris": 60,
+    "target_tris": 200,
+    "dims_m": [
+     0.54,
+     0.38,
+     0.22
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_TrayRack.fbx",
+  "seconds": 0.1
+ },
+ {
+  "module": "Prop_CupDispenser",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_CupDispenser",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 180,
+    "tris": 180,
+    "target_tris": 250,
+    "dims_m": [
+     0.14,
+     0.14,
+     0.325
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_CupDispenser.fbx",
+  "seconds": 0.1
+ },
+ {
+  "module": "Env_Canteen",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Shell",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 108,
+    "tris": 108,
+    "target_tris": 300,
+    "dims_m": [
+     7.29,
+     7.254,
+     3.273
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "DisplayCase_A",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 92,
+    "tris": 60,
+    "target_tris": 300,
+    "dims_m": [
+     1.292,
+     2.24,
+     1.234
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "DisplayCase_B",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 92,
+    "tris": 60,
+    "target_tris": 300,
+    "dims_m": [
+     1.292,
+     2.24,
+     1.234
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Counter_A",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 28,
+    "tris": 28,
+    "target_tris": 60,
+    "dims_m": [
+     1.558,
+     2.213,
+     0.79
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Counter_B",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 28,
+    "tris": 28,
+    "target_tris": 60,
+    "dims_m": [
+     0.825,
+     1.246,
+     1.017
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Plates",
+    "errors": [],
+    "source_objects": 13,
+    "tris_source": 16896,
+    "tris": 2200,
+    "target_tris": 2200,
+    "dims_m": [
+     0.387,
+     3.968,
+     0.646
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "FridgeBody",
+    "errors": [],
+    "source_objects": 21,
+    "tris_source": 4466,
+    "tris": 4466,
+    "target_tris": 5000,
+    "dims_m": [
+     0.685,
+     0.885,
+     2.21
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Door_Upper",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 136,
+    "tris": 136,
+    "target_tris": 300,
+    "dims_m": [
+     0.43,
+     0.787,
+     1.283
+    ],
+    "pivot_world": [
+     -0.7,
+     -0.9,
+     1.6
+    ]
+   },
+   {
+    "group": "Door_Lower",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 136,
+    "tris": 136,
+    "target_tris": 300,
+    "dims_m": [
+     0.142,
+     0.886,
+     0.853
+    ],
+    "pivot_world": [
+     -0.7,
+     -0.9,
+     0.5
+    ]
+   },
+   {
+    "group": "Fixtures",
+    "errors": [],
+    "source_objects": 4,
+    "tris_source": 1588,
+    "tris": 1500,
+    "target_tris": 1500,
+    "dims_m": [
+     0.427,
+     0.795,
+     0.22
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "WaterCooler",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 10264,
+    "tris": 3000,
+    "target_tris": 3000,
+    "dims_m": [
+     0.534,
+     0.615,
+     1.322
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [
+   "Spawn_Donut_00",
+   "Spawn_Donut_01",
+   "Spawn_Donut_02",
+   "Spawn_Donut_03",
+   "Spawn_Donut_04",
+   "Spawn_Donut_05",
+   "Spawn_Donut_06",
+   "Spawn_Donut_07",
+   "Spawn_Donut_08",
+   "Spawn_Donut_09",
+   "Spawn_Donut_10",
+   "Spawn_Donut_11",
+   "Spawn_Cola_00",
+   "Spawn_Cola_01",
+   "Spawn_Shake_00",
+   "Spawn_Shake_01",
+   "Spawn_Cake_00",
+   "Spawn_Cup_00"
+  ],
+  "fbx": "Environment/Env_Canteen.fbx",
+  "seconds": 0.7
+ },
+ {
+  "module": "Prop_TablePatio",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_TablePatio",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 196,
+    "tris": 196,
+    "target_tris": 250,
+    "dims_m": [
+     0.744,
+     2.199,
+     0.729
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_TablePatio.fbx",
+  "seconds": 0.2
+ },
+ {
+  "module": "Prop_ChairBlue",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_ChairBlue",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 24080,
+    "tris": 1200,
+    "target_tris": 1200,
+    "dims_m": [
+     0.589,
+     0.604,
+     0.943
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_ChairBlue.fbx",
+  "seconds": 0.4
+ },
+ {
+  "module": "Env_Patio",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Ground",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 2,
+    "tris": 2,
+    "target_tris": 10,
+    "dims_m": [
+     16.337,
+     9.261,
+     0.0
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Fence",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 618336,
+    "tris": 12,
+    "target_tris": 20,
+    "dims_m": [
+     16.327,
+     0.056,
+     1.905
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Building",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 3608,
+    "tris": 3508,
+    "target_tris": 3600,
+    "dims_m": [
+     3.485,
+     5.932,
+     2.305
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Planter",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 188,
+    "tris": 180,
+    "target_tris": 200,
+    "dims_m": [
+     1.261,
+     3.059,
+     0.501
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Frames",
+    "errors": [],
+    "source_objects": 3,
+    "tris_source": 5244,
+    "tris": 2000,
+    "target_tris": 2000,
+    "dims_m": [
+     11.519,
+     0.125,
+     1.898
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Doors",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 552,
+    "tris": 552,
+    "target_tris": 600,
+    "dims_m": [
+     0.048,
+     4.369,
+     1.517
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Panels",
+    "errors": [],
+    "source_objects": 8,
+    "tris_source": 480,
+    "tris": 480,
+    "target_tris": 600,
+    "dims_m": [
+     2.707,
+     5.392,
+     0.979
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [
+   "Table_00",
+   "Table_01",
+   "Table_02",
+   "Table_03",
+   "Chair_00",
+   "Chair_01",
+   "Chair_02",
+   "Chair_03",
+   "Chair_04",
+   "Chair_05",
+   "Chair_06",
+   "Chair_07",
+   "Chair_08",
+   "Chair_09",
+   "Chair_10",
+   "Chair_11",
+   "Chair_12",
+   "Chair_13",
+   "Chair_14",
+   "Chair_15",
+   "Chair_16",
+   "Chair_17",
+   "Chair_18",
+   "Chair_19",
+   "Chair_20",
+   "Chair_21",
+   "Chair_22",
+   "Chair_23"
+  ],
+  "fbx": "Environment/Env_Patio.fbx",
+  "seconds": 0.2
+ }
+]

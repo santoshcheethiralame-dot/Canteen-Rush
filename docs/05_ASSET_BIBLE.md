@@ -194,3 +194,18 @@ Inputs: `--source <dir with Outdoor/>`, `--out <dir for FBX/PNG>`, `--config too
 - The canteen `cup` object has Subsurf lvl 2 on an empty mesh — do not try to rescue it.
 - All source files reference absolute or relative paths on the authors' computers. Never "fix" paths by editing the sources; rebuild materials in the export step.
 - The .blend files are untrusted: always `--disable-autoexec`; never commit them (they are git-ignored).
+
+---
+
+## 11. Build reality (supersedes §7 where they differ) — 2026-10-30
+
+What `tools/blender/build_world.py` actually produces today (numbers in `docs/PIPELINE_STATUS.md`):
+
+- **Multi-node modules.** `Env_Canteen.fbx` is ONE FBX with 11 mesh nodes (`Shell`, `DisplayCase_A/B`, `Counter_A/B`, `Plates`, `FridgeBody`, `Door_Upper`, `Door_Lower`, `Fixtures`, `WaterCooler`) that all keep their positions in the canteen's source frame, plus 18 marker empties (`Spawn_Donut_00..11`, `Spawn_Cola_00..01`, `Spawn_Shake_00..01`, `Spawn_Cake_00`, `Spawn_Cup_00`). Place the FBX at the Unity origin; spawners and doors are placed by reading the imported nodes/markers. The fridge doors are separate nodes whose **pivot is the hinge axis**, closed = identity rotation.
+- **`Env_Patio.fbx`** (7 mesh nodes + `Table_00..03` + `Chair_00..23` markers, base-centre anchors, no orientation) at ×0.1. The 618,336-triangle fence is a 12-triangle box (dot pattern lost; texture it).
+- **Single-node props** (`Item_*`, `Prop_*`) are centred (`Item_Donut`) or base-centred at the origin; `Item_Cup.fbx` has two nodes (`Item_Cup`, `Cup_Water`).
+- **Water cooler:** bottle and pump are one 10k-triangle mesh and cannot be split. P2's pump interactable must be an invisible collider over the pump head, not a mesh node (the earlier `PumpHead` child in §7 does not exist).
+- **Canteen shell is an open-front kiosk** (open toward −X; back wall at +X). See `docs/LAYOUT.md`.
+- **Generated props** (tray, rack, cup + water disc, dispenser) are built procedurally by the script (not from any source file) and are intentionally crude flat-colour meshes.
+- **Materials:** each module has `Assets/Art/Materials/source/<module>.materials.json` with Blender base colours/textures. The FBX also carries base colours; Unity's URP importer converts them. Missing label textures mean the shake is plain brown and the cake is dark grey until recoloured.
+- **Not built yet:** `Env_PodsBackdrop`, `Env_Terrace`, `Env_Skyline`, `Env_Washroom`, `Prop_PlantPot`.

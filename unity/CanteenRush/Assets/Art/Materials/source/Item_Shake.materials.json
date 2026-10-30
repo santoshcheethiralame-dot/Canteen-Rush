@@ -1,0 +1,62 @@
+[
+ {
+  "name": "Material #46",
+  "base_color": [
+   0.5879999995231628,
+   0.5879999995231628,
+   0.5879999995231628,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.4919,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material #81",
+  "base_color": [
+   0.5879999995231628,
+   0.5879999995231628,
+   0.5879999995231628,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.8586,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material.003",
+  "base_color": [
+   0.2079162746667862,
+   0.06298165768384933,
+   0.029155509546399117,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]

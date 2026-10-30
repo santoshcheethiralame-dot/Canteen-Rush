@@ -1,0 +1,22 @@
+[
+ {
+  "name": "M_RackMetal",
+  "base_color": [
+   0.550000011920929,
+   0.5699999928474426,
+   0.6000000238418579,
+   1.0
+  ],
+  "metallic": 0.6,
+  "roughness": 0.35,
+  "emission": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]

@@ -1,0 +1,324 @@
+[
+ {
+  "name": "canteen",
+  "base_color": [
+   0.21198393404483795,
+   0.21198393404483795,
+   0.21198393404483795,
+   1.0
+  ],
+  "metallic": 0.1222,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "metal",
+  "base_color": [
+   0.16826917231082916,
+   0.16826921701431274,
+   0.16826938092708588,
+   1.0
+  ],
+  "metallic": 0.6889,
+  "roughness": 0.2444,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "glass",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0,
+   0,
+   0,
+   1
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "marble",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "stone-texture.jpg"
+  }
+ },
+ {
+  "name": "Material.001",
+  "base_color": [
+   0.1391783058643341,
+   0.1391783356666565,
+   0.13917846977710724,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material.002",
+  "base_color": [
+   0.7942132353782654,
+   0.7739261984825134,
+   0.7991026639938354,
+   1.0
+  ],
+  "metallic": 0.3778,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material.015",
+  "base_color": [
+   0.6118382811546326,
+   0.31854701042175293,
+   0.7991024851799011,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "silver",
+  "base_color": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "metallic": 1.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "white plastic",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.0,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "glass.001",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.0,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "black metal",
+  "base_color": [
+   0.4292253851890564,
+   0.4292253851890564,
+   0.4292253851890564,
+   1.0
+  ],
+  "metallic": 1.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "light",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0,
+   0,
+   0,
+   1
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "plastic_blue",
+  "base_color": [
+   0.3803919851779938,
+   0.5372549891471863,
+   0.7372549772262573,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.7551,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "bottle",
+  "base_color": [
+   0.19607800245285034,
+   0.2627449929714203,
+   0.4745100140571594,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.7551,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 0.2,
+  "textures": {}
+ },
+ {
+  "name": "water",
+  "base_color": [
+   0.19607800245285034,
+   0.2627449929714203,
+   0.4745100140571594,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.7551,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 0.3,
+  "textures": {}
+ },
+ {
+  "name": "plastic_white",
+  "base_color": [
+   0.8470590114593506,
+   0.8941180109977722,
+   0.9333329796791077,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.7551,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]

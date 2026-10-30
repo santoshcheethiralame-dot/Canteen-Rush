@@ -1,0 +1,82 @@
+[
+ {
+  "name": "metal.001",
+  "base_color": [
+   0.0784313753247261,
+   0.0784313753247261,
+   0.0784313753247261,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5528,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "metal_pepsi",
+  "base_color": [
+   0.5,
+   0.5,
+   0.5,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5528,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material #3K",
+  "base_color": [
+   0.0784313753247261,
+   0.0784313753247261,
+   0.0784313753247261,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5528,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "858A-CL2",
+  "base_color": [
+   0.003921568859368563,
+   0.250980406999588,
+   0.5137255191802979,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5528,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]

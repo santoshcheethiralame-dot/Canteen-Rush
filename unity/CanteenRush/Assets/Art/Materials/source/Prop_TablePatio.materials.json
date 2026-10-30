@@ -1,0 +1,124 @@
+[
+ {
+  "name": "marble dark",
+  "base_color": [
+   0.672166645526886,
+   0.8000000715255737,
+   0.5873979330062866,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.1364,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material.002",
+  "base_color": [
+   0.24673199653625488,
+   0.45683300495147705,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "stone-texture.jpg"
+  }
+ },
+ {
+  "name": "(null)",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "grey.001",
+  "base_color": [
+   0.24762700498104095,
+   0.24762700498104095,
+   0.24762700498104095,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "red",
+  "base_color": [
+   0.6925531625747681,
+   0.03584760054945946,
+   0.020089013502001762,
+   1.0
+  ],
+  "metallic": 0.5,
+  "roughness": 0.7636,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "metal",
+  "base_color": [
+   0.8923571705818176,
+   0.8923571705818176,
+   0.8923571705818176,
+   1.0
+  ],
+  "metallic": 1.0,
+  "roughness": 0.0667,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]

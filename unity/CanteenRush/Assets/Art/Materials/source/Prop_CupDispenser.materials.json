@@ -1,0 +1,22 @@
+[
+ {
+  "name": "M_DispenserBody",
+  "base_color": [
+   0.8500000238418579,
+   0.8500000238418579,
+   0.8799999952316284,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]
