@@ -73,11 +73,11 @@ Unity layers (Project Settings > Tags and Layers — P1 creates them at M0):
 | 8 | `Tray` | trays |
 | 9 | `Customers` | customer bodies |
 | 10 | `Stations` | fridge doors, cooler, spawner volumes |
-| 11 | `UI` | world-space UI colliders |
+| 11 | `WorldUI` | world-space UI colliders (Unity's built-in layer 5 `UI` stays for the Canvas/UGUI default and is not used for physics) |
 | 12 | `Player` | XR rig body/hands |
 | 13 | `Triggers` | fill zone, serve zone, spawn volumes |
 
-Physics collision matrix: `Items` collide with `Environment`, `Items`, `Tray`, `Stations`, `Player`; `Tray` with `Environment`, `Items`, `Stations`, `Player`; `Customers` only with `Environment`; `UI` with nothing physical; `Triggers` do not collide (trigger overlaps only with `Items`, `Tray`).
+Physics collision matrix: `Items` collide with `Environment`, `Items`, `Tray`, `Stations`, `Player`; `Tray` with `Environment`, `Items`, `Stations`, `Player`; `Customers` only with `Environment`; `WorldUI` with nothing physical; `Triggers` do not collide (trigger overlaps only with `Items`, `Tray`).
 
 Tags: `Tray`, `SeatPoint`, `ServeSocket`, `FillZone`, `SurfaceTile`, `SurfaceStone`, `Spawner`.
 
