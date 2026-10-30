@@ -1,0 +1,366 @@
+[
+ {
+  "name": "Material.012",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Mrable",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "Part4_marble_texture.jpg"
+  }
+ },
+ {
+  "name": "Material.011",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "Part4_marble_texture.jpg"
+  }
+ },
+ {
+  "name": "pillar",
+  "base_color": [
+   0.4564012587070465,
+   0.4564012587070465,
+   0.4564012587070465,
+   1.0
+  ],
+  "metallic": 0.4771,
+  "roughness": 0.2523,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "light bg",
+  "base_color": [
+   0.029377348721027374,
+   0.03253642097115517,
+   0.036806125193834305,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "light emiision",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0,
+   0,
+   0,
+   1
+  ],
+  "emission_strength": 0.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "Material.009",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "Part4_marble_texture.jpg"
+  }
+ },
+ {
+  "name": "Material.010",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "Part4_marble_texture.jpg"
+  }
+ },
+ {
+  "name": "Material.008",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "Part4_marble_texture.jpg"
+  }
+ },
+ {
+  "name": "ClayBrick.002",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "leaves_texture.006",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.006"
+  }
+ },
+ {
+  "name": "pot_texture.004",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "pot_basecolor.png.004"
+  }
+ },
+ {
+  "name": "leaves_texture.009",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.009"
+  }
+ },
+ {
+  "name": "pot_texture.002",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "pot_basecolor.png.002"
+  }
+ },
+ {
+  "name": "leaves_texture.007",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.007"
+  }
+ },
+ {
+  "name": "pot_texture.003",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "pot_basecolor.png.003"
+  }
+ },
+ {
+  "name": "leaves_texture.008",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.008"
+  }
+ }
+]

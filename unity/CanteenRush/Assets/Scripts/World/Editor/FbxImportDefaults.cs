@@ -8,6 +8,9 @@ namespace CanteenRush.World.Editor
     {
         const string ArtRoot = "Assets/Art/";
 
+        // Backdrops sit beyond lightmap range and are lit by probes, so they get no second UV set.
+        static bool IsBackdrop(string path) { return path.EndsWith("Env_PodsBackdrop.fbx") || path.EndsWith("Env_Terrace.fbx") || path.EndsWith("Env_Skyline.fbx"); }
+
         void OnPreprocessModel()
         {
             if (!assetPath.StartsWith(ArtRoot) || !assetPath.EndsWith(".fbx")) return;
@@ -27,7 +30,7 @@ namespace CanteenRush.World.Editor
             importer.importTangents = ModelImporterTangents.CalculateMikk;
 
             // Lightmapped architecture needs a second UV set; small movable props do not.
-            importer.generateSecondaryUV = assetPath.Contains("/Environment/");
+            importer.generateSecondaryUV = assetPath.Contains("/Environment/") && !IsBackdrop(assetPath);
         }
     }
 }

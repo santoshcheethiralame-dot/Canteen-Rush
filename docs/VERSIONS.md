@@ -14,4 +14,4 @@
 | uGUI (incl. TextMeshPro) | 2.0.0 | |
 | Blender (pipeline) | 5.2.0 LTS | source files written by 3.3.6 |
 
-Status: manifest written by hand against the Unity package registry (versions confirmed to exist and to list compatible dependencies). **Not yet opened in the editor** — the editor on the author's machine has no activated license (see `docs/DECISIONS.md` 2026-10-30). First open will generate `packages-lock.json`; commit it.
+Status: opened and built in the editor from 2026-10-30 (Personal license activated); `packages-lock.json` is committed. Built-in module `com.unity.modules.screencapture` was added on 2026-10-30 for the perf probe's screenshots; no package version changed.

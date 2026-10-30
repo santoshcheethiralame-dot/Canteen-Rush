@@ -48,7 +48,9 @@ def tri_count(obj):
 
 
 def select_only(objs):
-    bpy.ops.object.select_all(action='DESELECT')
+    for o in list(bpy.context.view_layer.objects):
+        if o is not None:   # a removed proxy source can linger as None
+            o.select_set(False)
     for o in objs:
         o.select_set(True)
     bpy.context.view_layer.objects.active = objs[0]
@@ -156,6 +158,10 @@ def process_group(g, scale):
     res = {"group": g["name"], "errors": [], "source_objects": len(objs)}
     for o in objs:
         o.hide_set(False); o.hide_viewport = False; o.hide_render = False
+    for o in objs:
+        if o.mode != 'OBJECT':   # the author saved some sources mid-edit
+            bpy.context.view_layer.objects.active = o
+            bpy.ops.object.mode_set(mode='OBJECT')
     if g.get("proxy") == "bbox":
         mn = Vector((1e9,) * 3); mx = Vector((-1e9,) * 3)
         for o in objs:

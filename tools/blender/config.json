@@ -507,6 +507,203 @@
           "anchor": "base"
         }
       ]
+    },
+    "Env_PodsBackdrop": {
+      "file": "Outdoor/Part 2/Copy of part 2_final.blend",
+      "category": "Environment",
+      "scale": 0.2,
+      "groups": [
+        {
+          "name": "Pod_Frames",
+          "objects": [
+            "Cube\\.009",
+            "Cube\\.014"
+          ],
+          "target_tris": 900,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Pod_Tables",
+          "objects": [
+            "Cube\\.0(05|06|08|10|11|12)"
+          ],
+          "target_tris": 1800,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Pod_Wall",
+          "objects": [
+            "Cube"
+          ],
+          "target_tris": 200,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Pod_Plants",
+          "objects": [
+            "leaves(\\.005)?"
+          ],
+          "target_tris": 2400,
+          "pivot": "keep",
+          "place": "keep"
+        }
+      ]
+    },
+    "Env_Terrace": {
+      "file": "Outdoor/Part 4/Copy of part 4_final.blend",
+      "category": "Environment",
+      "scale": 0.2,
+      "groups": [
+        {
+          "name": "Terrace_Screen",
+          "objects": [
+            "partition\\.046"
+          ],
+          "target_tris": 1500,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Terrace_Roof",
+          "objects": [
+            "top_(left|right)_1",
+            "rail_(left|right)_1"
+          ],
+          "target_tris": 700,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Terrace_Seats",
+          "objects": [
+            "seat_right_\\d",
+            "pillar_left_1"
+          ],
+          "target_tris": 3200,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Terrace_Lights",
+          "objects": [
+            "light_right_3(\\.\\d+)?"
+          ],
+          "target_tris": 4100,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Terrace_Planters",
+          "objects": [
+            "Cube\\.03[34]"
+          ],
+          "target_tris": 700,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Terrace_Pots",
+          "objects": [
+            "Pot\\d"
+          ],
+          "target_tris": 2800,
+          "pivot": "keep",
+          "place": "keep"
+        }
+      ]
+    },
+    "Env_Skyline": {
+      "file": "Outdoor/Part 1/Copy of part 1_final.blend",
+      "category": "Environment",
+      "scale": 2.0,
+      "groups": [
+        {
+          "name": "Skyline_Trees",
+          "objects": [
+            "pillar\\.00[123]"
+          ],
+          "target_tris": 6000,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Skyline_Pot",
+          "objects": [
+            "Pot",
+            "leaves(\\.\\d+)?"
+          ],
+          "target_tris": 1500,
+          "pivot": "keep",
+          "place": "keep"
+        }
+      ]
+    },
+    "Prop_PlantPot": {
+      "file": "Outdoor/Part 2/Copy of part 2_final.blend",
+      "category": "Props",
+      "scale": 0.2,
+      "groups": [
+        {
+          "name": "Prop_PlantPot",
+          "objects": [
+            "leaves"
+          ],
+          "target_tris": 1500,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.7,
+            1.2
+          ]
+        }
+      ]
+    },
+    "Prop_PlantPot_LOD1": {
+      "file": "Outdoor/Part 2/Copy of part 2_final.blend",
+      "category": "Props",
+      "scale": 0.2,
+      "groups": [
+        {
+          "name": "Prop_PlantPot_LOD1",
+          "objects": [
+            "leaves"
+          ],
+          "target_tris": 350,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.7,
+            1.2
+          ]
+        }
+      ]
+    },
+    "Prop_ChairBlue_LOD1": {
+      "file": "Outdoor/Part 3/Copy of Part3_final.blend",
+      "category": "Props",
+      "scale": 0.1,
+      "groups": [
+        {
+          "name": "Prop_ChairBlue_LOD1",
+          "objects": [
+            "Cube_Cube\\.026"
+          ],
+          "target_tris": 300,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.85,
+            1.05
+          ],
+          "max_extent_m": [
+            0.85,
+            1.05
+          ]
+        }
+      ]
     }
   }
 }

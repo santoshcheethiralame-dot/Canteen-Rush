@@ -1,0 +1,150 @@
+[
+ {
+  "name": "ClayBrick",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "leaves_texture.001",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.001"
+  }
+ },
+ {
+  "name": "leaves_texture.004",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.004"
+  }
+ },
+ {
+  "name": "Material.006",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ },
+ {
+  "name": "leaves_texture.003",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.003"
+  }
+ },
+ {
+  "name": "leaves_texture.002",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {
+   "base_color": "leaves_basecolor.png.002"
+  }
+ },
+ {
+  "name": "ClayBrick.001",
+  "base_color": [
+   0.800000011920929,
+   0.800000011920929,
+   0.800000011920929,
+   1.0
+  ],
+  "metallic": 0.0,
+  "roughness": 0.5,
+  "emission": [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "emission_strength": 1.0,
+  "alpha": 1.0,
+  "textures": {}
+ }
+]

@@ -3,7 +3,47 @@ guid: 25a9fdb1399cb0a4eb7fbc79cdfe00d0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #46.001
+    second: {fileID: 2100000, guid: bb69bf617cdb16e4ea8028a7796b692d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #81.001
+    second: {fileID: 2100000, guid: e631599ecfc66e449b26a271ac3667d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: b3ecfc96f9849c94b92df14b0eee7c34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: d7b1ce949bc070a44994df2b435b846c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 0b66b33fc3012ee4294fde11adf47ea5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 5cda9ae73b07ab74eb9419fcfbba32da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rosso
+    second: {fileID: 2100000, guid: a5a2b8f28b5c7404eb3a409d14027104, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: torta
+    second: {fileID: 2100000, guid: 3d27aa9e1c9489344a2f228229a8501f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -1,5 +1,239 @@
 [
  {
+  "module": "Item_Donut",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Donut",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 176864,
+    "tris": 1998,
+    "target_tris": 2000,
+    "dims_m": [
+     0.32,
+     0.319,
+     0.14
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Donut.fbx",
+  "seconds": 8.4
+ },
+ {
+  "module": "Item_Cola",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Cola",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 2918,
+    "tris": 795,
+    "target_tris": 800,
+    "dims_m": [
+     0.166,
+     0.166,
+     0.321
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Cola.fbx",
+  "seconds": 0.6
+ },
+ {
+  "module": "Item_Shake",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Shake",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 7576,
+    "tris": 1500,
+    "target_tris": 1500,
+    "dims_m": [
+     0.222,
+     0.223,
+     0.621
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Shake.fbx",
+  "seconds": 0.5
+ },
+ {
+  "module": "Item_Cake",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Cake",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 55452,
+    "tris": 3000,
+    "target_tris": 3000,
+    "dims_m": [
+     0.516,
+     0.494,
+     0.457
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Cake.fbx",
+  "seconds": 0.9
+ },
+ {
+  "module": "Item_Cup",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Item_Cup",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 44,
+    "tris": 44,
+    "target_tris": 300,
+    "dims_m": [
+     0.08,
+     0.08,
+     0.1
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Cup_Water",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 44,
+    "tris": 44,
+    "target_tris": 100,
+    "dims_m": [
+     0.073,
+     0.073,
+     0.006
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Items/Item_Cup.fbx",
+  "seconds": 0.3
+ },
+ {
+  "module": "Prop_Tray",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_Tray",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 60,
+    "tris": 60,
+    "target_tris": 200,
+    "dims_m": [
+     0.45,
+     0.3,
+     0.03
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_Tray.fbx",
+  "seconds": 0.1
+ },
+ {
+  "module": "Prop_TrayRack",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_TrayRack",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 60,
+    "tris": 60,
+    "target_tris": 200,
+    "dims_m": [
+     0.54,
+     0.38,
+     0.22
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_TrayRack.fbx",
+  "seconds": 0.1
+ },
+ {
+  "module": "Prop_CupDispenser",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_CupDispenser",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 180,
+    "tris": 180,
+    "target_tris": 250,
+    "dims_m": [
+     0.14,
+     0.14,
+     0.325
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_CupDispenser.fbx",
+  "seconds": 0.1
+ },
+ {
   "module": "Env_Canteen",
   "errors": [],
   "groups": [
@@ -223,6 +457,548 @@
    "Spawn_Cola_01"
   ],
   "fbx": "Environment/Env_Canteen.fbx",
-  "seconds": 5.1
+  "seconds": 1.0
+ },
+ {
+  "module": "Prop_TablePatio",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_TablePatio",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 196,
+    "tris": 196,
+    "target_tris": 250,
+    "dims_m": [
+     0.744,
+     2.199,
+     0.729
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_TablePatio.fbx",
+  "seconds": 0.3
+ },
+ {
+  "module": "Prop_ChairBlue",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_ChairBlue",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 24080,
+    "tris": 1200,
+    "target_tris": 1200,
+    "dims_m": [
+     0.589,
+     0.604,
+     0.943
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_ChairBlue.fbx",
+  "seconds": 0.5
+ },
+ {
+  "module": "Env_Patio",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Ground",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 2,
+    "tris": 2,
+    "target_tris": 10,
+    "dims_m": [
+     16.337,
+     9.261,
+     0.0
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Fence",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 618336,
+    "tris": 12,
+    "target_tris": 20,
+    "dims_m": [
+     16.327,
+     0.056,
+     1.905
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Building",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 3608,
+    "tris": 3508,
+    "target_tris": 3600,
+    "dims_m": [
+     3.485,
+     5.932,
+     2.305
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Planter",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 188,
+    "tris": 180,
+    "target_tris": 200,
+    "dims_m": [
+     1.261,
+     3.059,
+     0.501
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Frames",
+    "errors": [],
+    "source_objects": 3,
+    "tris_source": 5244,
+    "tris": 2000,
+    "target_tris": 2000,
+    "dims_m": [
+     11.519,
+     0.125,
+     1.898
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Doors",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 552,
+    "tris": 552,
+    "target_tris": 600,
+    "dims_m": [
+     0.048,
+     4.369,
+     1.517
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Panels",
+    "errors": [],
+    "source_objects": 8,
+    "tris_source": 480,
+    "tris": 480,
+    "target_tris": 600,
+    "dims_m": [
+     2.707,
+     5.392,
+     0.979
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [
+   "Table_00",
+   "Table_01",
+   "Table_02",
+   "Table_03",
+   "Chair_00",
+   "Chair_01",
+   "Chair_02",
+   "Chair_03",
+   "Chair_04",
+   "Chair_05",
+   "Chair_06",
+   "Chair_07",
+   "Chair_08",
+   "Chair_09",
+   "Chair_10",
+   "Chair_11",
+   "Chair_12",
+   "Chair_13",
+   "Chair_14",
+   "Chair_15",
+   "Chair_16",
+   "Chair_17",
+   "Chair_18",
+   "Chair_19",
+   "Chair_20",
+   "Chair_21",
+   "Chair_22",
+   "Chair_23"
+  ],
+  "fbx": "Environment/Env_Patio.fbx",
+  "seconds": 0.3
+ },
+ {
+  "module": "Env_PodsBackdrop",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Pod_Frames",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 3876,
+    "tris": 900,
+    "target_tris": 900,
+    "dims_m": [
+     9.959,
+     6.07,
+     3.98
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Pod_Tables",
+    "errors": [],
+    "source_objects": 6,
+    "tris_source": 2520,
+    "tris": 1800,
+    "target_tris": 1800,
+    "dims_m": [
+     9.263,
+     5.093,
+     0.924
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Pod_Wall",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 212,
+    "tris": 200,
+    "target_tris": 200,
+    "dims_m": [
+     2.947,
+     1.186,
+     3.047
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Pod_Plants",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 12310,
+    "tris": 2400,
+    "target_tris": 2400,
+    "dims_m": [
+     0.936,
+     3.416,
+     0.947
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Environment/Env_PodsBackdrop.fbx",
+  "seconds": 0.4
+ },
+ {
+  "module": "Env_Terrace",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Terrace_Screen",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 1570,
+    "tris": 1250,
+    "target_tris": 1500,
+    "dims_m": [
+     7.901,
+     0.234,
+     3.447
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Terrace_Roof",
+    "errors": [],
+    "source_objects": 4,
+    "tris_source": 1344,
+    "tris": 700,
+    "target_tris": 700,
+    "dims_m": [
+     6.081,
+     3.585,
+     0.361
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Terrace_Seats",
+    "errors": [],
+    "source_objects": 4,
+    "tris_source": 8488,
+    "tris": 3122,
+    "target_tris": 3200,
+    "dims_m": [
+     3.271,
+     3.481,
+     1.54
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Terrace_Lights",
+    "errors": [],
+    "source_objects": 6,
+    "tris_source": 12732,
+    "tris": 4036,
+    "target_tris": 4100,
+    "dims_m": [
+     4.365,
+     3.515,
+     1.504
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Terrace_Planters",
+    "errors": [],
+    "source_objects": 2,
+    "tris_source": 6664,
+    "tris": 700,
+    "target_tris": 700,
+    "dims_m": [
+     3.537,
+     0.504,
+     0.479
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Terrace_Pots",
+    "errors": [],
+    "source_objects": 3,
+    "tris_source": 18465,
+    "tris": 2800,
+    "target_tris": 2800,
+    "dims_m": [
+     3.861,
+     0.454,
+     0.507
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Environment/Env_Terrace.fbx",
+  "seconds": 0.8
+ },
+ {
+  "module": "Env_Skyline",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Skyline_Trees",
+    "errors": [],
+    "source_objects": 3,
+    "tris_source": 48096,
+    "tris": 6000,
+    "target_tris": 6000,
+    "dims_m": [
+     6.023,
+     16.63,
+     7.595
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "group": "Skyline_Pot",
+    "errors": [],
+    "source_objects": 4,
+    "tris_source": 6281,
+    "tris": 1500,
+    "target_tris": 1500,
+    "dims_m": [
+     6.43,
+     1.55,
+     1.244
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Environment/Env_Skyline.fbx",
+  "seconds": 1.1
+ },
+ {
+  "module": "Prop_PlantPot",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_PlantPot",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 6155,
+    "tris": 1500,
+    "target_tris": 1500,
+    "dims_m": [
+     0.936,
+     0.849,
+     0.947
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_PlantPot.fbx",
+  "seconds": 0.2
+ },
+ {
+  "module": "Prop_PlantPot_LOD1",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_PlantPot_LOD1",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 6155,
+    "tris": 350,
+    "target_tris": 350,
+    "dims_m": [
+     0.936,
+     0.849,
+     0.947
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_PlantPot_LOD1.fbx",
+  "seconds": 0.2
+ },
+ {
+  "module": "Prop_ChairBlue_LOD1",
+  "errors": [],
+  "groups": [
+   {
+    "group": "Prop_ChairBlue_LOD1",
+    "errors": [],
+    "source_objects": 1,
+    "tris_source": 24080,
+    "tris": 300,
+    "target_tris": 300,
+    "dims_m": [
+     0.59,
+     0.604,
+     0.943
+    ],
+    "pivot_world": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  ],
+  "markers": [],
+  "fbx": "Props/Prop_ChairBlue_LOD1.fbx",
+  "seconds": 0.5
  }
 ]

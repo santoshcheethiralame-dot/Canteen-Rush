@@ -3,7 +3,12 @@ guid: c9522ad51a3697a4ea493d3d5e3f2718
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_TrayBody
+    second: {fileID: 2100000, guid: acb61b296d95fde42b3be2d23f640eb4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

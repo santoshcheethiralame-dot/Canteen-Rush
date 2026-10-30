@@ -32,3 +32,9 @@ __pycache__/
 
 # editor
 .vscode/
+
+# player builds and perf-probe output
+/Builds/
+/perf/
+/unity/CanteenRush/Assets/Resources/Performance*
+/unity/CanteenRush/Assets/Resources.meta

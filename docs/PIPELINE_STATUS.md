@@ -1,4 +1,4 @@
-# Pipeline status (generated from `Assets/Art/build_report.json`)
+# Pipeline status (generated from `Assets/Art/build_report.json` by `tools/gen_pipeline_status.py`)
 
 Run `blender -b --factory-startup --disable-autoexec --python tools/blender/build_world.py -- --source source --out unity/CanteenRush/Assets/Art` to regenerate. Source tris are evaluated (modifiers applied).
 
@@ -20,11 +20,11 @@ Run `blender -b --factory-startup --disable-autoexec --python tools/blender/buil
 | Environment/Env_Canteen.fbx | Counter_B | 28 | 28 | 60 | 0.82 x 1.25 x 1.02 | [0.0, 0.0, 0.0] |
 | Environment/Env_Canteen.fbx | Plates | 16,896 | 2,200 | 2200 | 0.39 x 3.97 x 0.65 | [0.0, 0.0, 0.0] |
 | Environment/Env_Canteen.fbx | FridgeBody | 4,466 | 4,466 | 5000 | 0.69 x 0.89 x 2.21 | [0.0, 0.0, 0.0] |
-| Environment/Env_Canteen.fbx | Door_Upper | 136 | 136 | 300 | 0.43 x 0.79 x 1.28 | [-0.7, -0.9, 1.6] |
-| Environment/Env_Canteen.fbx | Door_Lower | 136 | 136 | 300 | 0.14 x 0.89 x 0.85 | [-0.7, -0.9, 0.5] |
+| Environment/Env_Canteen.fbx | Door_Upper | 136 | 136 | 300 | 0.43 x 0.79 x 1.28 | [-0.1, -0.9, 1.6] |
+| Environment/Env_Canteen.fbx | Door_Lower | 136 | 136 | 300 | 0.14 x 0.89 x 0.85 | [-0.1, -0.9, 0.5] |
 | Environment/Env_Canteen.fbx | Fixtures | 1,588 | 1,500 | 1500 | 0.43 x 0.80 x 0.22 | [0.0, 0.0, 0.0] |
 | Environment/Env_Canteen.fbx | WaterCooler | 10,264 | 3,000 | 3000 | 0.53 x 0.61 x 1.32 | [0.0, 0.0, 0.0] |
-| Environment/Env_Canteen.fbx | markers | | | | 18 empties: Spawn_Cake, Spawn_Cola, Spawn_Cup, Spawn_Donut, Spawn_Shake | |
+| Environment/Env_Canteen.fbx | markers | | | | | 18 empties: Spawn_Cake, Spawn_Cola, Spawn_Cup, Spawn_Donut, Spawn_Shake |
 | Props/Prop_TablePatio.fbx | Prop_TablePatio | 196 | 196 | 250 | 0.74 x 2.20 x 0.73 | [0.0, 0.0, 0.0] |
 | Props/Prop_ChairBlue.fbx | Prop_ChairBlue | 24,080 | 1,200 | 1200 | 0.59 x 0.60 x 0.94 | [0.0, 0.0, 0.0] |
 | Environment/Env_Patio.fbx | Ground | 2 | 2 | 10 | 16.34 x 9.26 x 0.00 | [0.0, 0.0, 0.0] |
@@ -34,8 +34,23 @@ Run `blender -b --factory-startup --disable-autoexec --python tools/blender/buil
 | Environment/Env_Patio.fbx | Frames | 5,244 | 2,000 | 2000 | 11.52 x 0.12 x 1.90 | [0.0, 0.0, 0.0] |
 | Environment/Env_Patio.fbx | Doors | 552 | 552 | 600 | 0.05 x 4.37 x 1.52 | [0.0, 0.0, 0.0] |
 | Environment/Env_Patio.fbx | Panels | 480 | 480 | 600 | 2.71 x 5.39 x 0.98 | [0.0, 0.0, 0.0] |
-| Environment/Env_Patio.fbx | markers | | | | 28 empties: Chair, Table | |
+| Environment/Env_Patio.fbx | markers | | | | | 28 empties: Chair, Table |
+| Environment/Env_PodsBackdrop.fbx | Pod_Frames | 3,876 | 900 | 900 | 9.96 x 6.07 x 3.98 | [0.0, 0.0, 0.0] |
+| Environment/Env_PodsBackdrop.fbx | Pod_Tables | 2,520 | 1,800 | 1800 | 9.26 x 5.09 x 0.92 | [0.0, 0.0, 0.0] |
+| Environment/Env_PodsBackdrop.fbx | Pod_Wall | 212 | 200 | 200 | 2.95 x 1.19 x 3.05 | [0.0, 0.0, 0.0] |
+| Environment/Env_PodsBackdrop.fbx | Pod_Plants | 12,310 | 2,400 | 2400 | 0.94 x 3.42 x 0.95 | [0.0, 0.0, 0.0] |
+| Environment/Env_Terrace.fbx | Terrace_Screen | 1,570 | 1,250 | 1500 | 7.90 x 0.23 x 3.45 | [0.0, 0.0, 0.0] |
+| Environment/Env_Terrace.fbx | Terrace_Roof | 1,344 | 700 | 700 | 6.08 x 3.58 x 0.36 | [0.0, 0.0, 0.0] |
+| Environment/Env_Terrace.fbx | Terrace_Seats | 8,488 | 3,122 | 3200 | 3.27 x 3.48 x 1.54 | [0.0, 0.0, 0.0] |
+| Environment/Env_Terrace.fbx | Terrace_Lights | 12,732 | 4,036 | 4100 | 4.37 x 3.52 x 1.50 | [0.0, 0.0, 0.0] |
+| Environment/Env_Terrace.fbx | Terrace_Planters | 6,664 | 700 | 700 | 3.54 x 0.50 x 0.48 | [0.0, 0.0, 0.0] |
+| Environment/Env_Terrace.fbx | Terrace_Pots | 18,465 | 2,800 | 2800 | 3.86 x 0.45 x 0.51 | [0.0, 0.0, 0.0] |
+| Environment/Env_Skyline.fbx | Skyline_Trees | 48,096 | 6,000 | 6000 | 6.02 x 16.63 x 7.59 | [0.0, 0.0, 0.0] |
+| Environment/Env_Skyline.fbx | Skyline_Pot | 6,281 | 1,500 | 1500 | 6.43 x 1.55 x 1.24 | [0.0, 0.0, 0.0] |
+| Props/Prop_PlantPot.fbx | Prop_PlantPot | 6,155 | 1,500 | 1500 | 0.94 x 0.85 x 0.95 | [0.0, 0.0, 0.0] |
+| Props/Prop_PlantPot_LOD1.fbx | Prop_PlantPot_LOD1 | 6,155 | 350 | 350 | 0.94 x 0.85 x 0.95 | [0.0, 0.0, 0.0] |
+| Props/Prop_ChairBlue_LOD1.fbx | Prop_ChairBlue_LOD1 | 24,080 | 300 | 300 | 0.59 x 0.60 x 0.94 | [0.0, 0.0, 0.0] |
 
-Built environment triangles (canteen + patio, before instancing chairs/tables): 18,456.
+Built environment triangles (canteen + patio + three backdrops, before instancing chairs/tables/plants): 43,864.
 
-Not built yet: `Env_PodsBackdrop` (Part 2), `Env_Terrace` (Part 4), `Env_Skyline` (Part 1), `Env_Washroom` (optional), `Prop_PlantPot`.
+Not built (cut, see `docs/DECISIONS.md`): `Env_Washroom`.

@@ -3,7 +3,32 @@ guid: cff7d6c5381bfa94ebca30f8ba07fa4d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: (null).001
+    second: {fileID: 2100000, guid: e60792e347cc61e43ae55de282894147, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 7c02cdb1e90141d43b0e4271c9da8b56, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: granite.001
+    second: {fileID: 2100000, guid: 7231d1cfd7d923748aa2eca9d3f64fdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grey.002
+    second: {fileID: 2100000, guid: 232f971a4628197409c50e7fd9f914b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal.001
+    second: {fileID: 2100000, guid: 2341f503c0893954b9b65769d64fc863, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

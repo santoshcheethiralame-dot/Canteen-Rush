@@ -3,7 +3,27 @@ guid: 15b8ff51a3ade2d49be6d92ff207842f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 858A-CL2
+    second: {fileID: 2100000, guid: 5ae2e702ee32a4d4e882a6612bc0e8fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #3K
+    second: {fileID: 2100000, guid: 10c6fa69304d2774892f766e3262d05c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal.001
+    second: {fileID: 2100000, guid: d21f731d3508d344b9e2e5bd1bd90eb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_pepsi
+    second: {fileID: 2100000, guid: c47e7cc2a10d8d641a7a51e69fab757e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

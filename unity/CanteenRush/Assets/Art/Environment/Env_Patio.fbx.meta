@@ -3,7 +3,67 @@ guid: ca98145dcd11cca49994354a738ffbe1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GLASS
+    second: {fileID: 2100000, guid: 69ea3f211cd23204c9536bf0e4455d3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: beige
+    second: {fileID: 2100000, guid: b97655fcdc028134ba3e8bac4b62fbe0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue_trim
+    second: {fileID: 2100000, guid: b5b7ed8e338b2594da203daa242dab27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark grey trim
+    second: {fileID: 2100000, guid: 563c3b3de0de625448d8c72ac8cf4ce2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: 69ea3f211cd23204c9536bf0e4455d3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grey
+    second: {fileID: 2100000, guid: 9cb75d8b1c7fd0c45a0cd662eb238cd8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grey_tile
+    second: {fileID: 2100000, guid: 84b27b5d04ad832438080b90b78bd890, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handle metal
+    second: {fileID: 2100000, guid: 4bbfd72187274bf4082cd7acca4561c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hinge
+    second: {fileID: 2100000, guid: 4c9b6c5f32e1f4d4b800f4cdf4ef1473, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: marble dark
+    second: {fileID: 2100000, guid: ed6774c9f877e86449c9992c7b32b929, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white
+    second: {fileID: 2100000, guid: 45589e3a3c15a524b802535faca50c64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white.001
+    second: {fileID: 2100000, guid: 9fc65c37ff6d2e3499755296ba01502b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

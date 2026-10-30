@@ -50,11 +50,14 @@ namespace CanteenRush.World.Editor
             var min = new Vector3(1e9f, 0, 1e9f); var max = new Vector3(-1e9f, 0, -1e9f);
             foreach (var v in tris.vertices) { min = Vector3.Min(min, v); max = Vector3.Max(max, v); }
             sb.AppendFormat("navmesh vertex bounds x {0:F1}..{1:F1} z {2:F1}..{3:F1}, {4} verts\n", min.x, max.x, min.z, max.z, tris.vertices.Length);
-            for (int i = 0; i < tris.indices.Length; i += 3)
-            {
-                var c = (tris.vertices[tris.indices[i]] + tris.vertices[tris.indices[i + 1]] + tris.vertices[tris.indices[i + 2]]) / 3f;
-                sb.AppendFormat("  tri centre ({0:F1}, {1:F1})\n", c.x, c.z);
-            }
+            var backdrop = GameObject.Find("Backdrop");
+            if (backdrop != null)
+                foreach (Transform bd in backdrop.transform)
+                {
+                    var bb = B(bd.gameObject); bb.center = Flat(bb.center); bb.size = new Vector3(bb.size.x, 0f, bb.size.z);
+                    float nearest = 1e9f; foreach (var vtx in tris.vertices) nearest = Mathf.Min(nearest, Mathf.Sqrt(bb.SqrDistance(Flat(vtx))));
+                    sb.AppendFormat("backdrop {0}: nearest walkable point {1:F1} m (gap to the deck's walkable area)\n", bd.name, nearest);
+                }
             var chairPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Props/Prop_ChairBlue.fbx");
             Vector3 front = MainSceneBuilder.ChairFront(chairPrefab);
             sb.AppendFormat("chair local front vector {0}\n", front);

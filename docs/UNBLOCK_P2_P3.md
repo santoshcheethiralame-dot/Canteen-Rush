@@ -19,25 +19,31 @@ Read with `docs/LAYOUT.md`. Everything here was authored without opening Unity (
 
 ## 2. What the scene contains
 
-- `World/Canteen`: `Env_Canteen.fbx` at the origin (kiosk, display cases, counters, plates, fridge + doors, cooler) and `Floor_Canteen` (tag `SurfaceTile`). `World/Patio`: `Env_Patio.fbx` shifted ~16 m onto the open side, `Apron` (tag `SurfaceStone`), 4 tables and 24 chairs instantiated from markers (chairs rotated to face their table), `Marker_CustomerEntrance`. The patio `Ground` is tagged `SurfaceStone`.
+- `World/Canteen`: `Env_Canteen.fbx` at the origin (kiosk, display cases, counters, plates, fridge + doors, cooler) and `Floor_Canteen` (tag `SurfaceTile`). `World/Roof`: the roof deck of the 13th floor (this is a rooftop, not a field), parapet and the campus far below. `World/Canopy`: the roof over the canteen and patio, held by branching tree-shaped columns, with a lattice grill closing both long sides floor to roof (ball and item throws cannot leave through it: it has a collider). `World/Patio`: `Env_Patio.fbx` shifted 14 m onto the open side (its service building is the stair/lift core), `Apron` (tag `SurfaceStone`), 4 tables (zig-zag, 9.5 to 18 m out) and 24 chairs instantiated from markers (chairs rotated to face their table), `Marker_CustomerEntrance`. The patio `Ground` is tagged `SurfaceStone`.
 - **8 `SeatPoint` components** (`CanteenRush.World.SeatPoint`, `Index` 0..7, `forward` toward the table), tag `SeatPoint`, under `World/Patio/SeatPoints`. Seats `2t`, `2t+1` belong to table `t` (tables ordered nearest-to-canteen first).
 - **18 `SpawnPoint` components** (`ItemKey` = `Donut`/`Cola`/`Shake`/`Cake`/`Cup`) under `Stations/SpawnPoints`: 12 donut plates, 2 cola, 2 shake, 1 cake, 1 cup dispenser. Place your `ItemSpawner` prefab at each.
 - NavMesh over the `Environment` layer (patio floor, apron, canteen floor) plus `NavMeshBootstrap` (rebakes at Start if the baked data is missing). Walk target = `SeatPoint`; spawn = `Marker_CustomerEntrance`.
 - Layers per `docs/04_CONTRACTS.md` section 3: world geometry on `Environment`; tables and chairs on `Stations` (so Items and Trays collide with them, and they do not carve the NavMesh).
 - `PlayerStart` under `_Rig`: between display case A and the fridge, facing the open side.
 - **P3:** `World/AudioZones/AudioZone_Indoor` and `AudioZone_Outdoor` are trigger BoxColliders on layer `Triggers` (indoor = kiosk bounds; outdoor = a 120 m box around the patio, overlapping indoor, so your zone component should let Indoor win while the player is inside it). Surface tags for footsteps: `SurfaceTile` (canteen floor), `SurfaceStone` (patio ground and apron); anything else defaults to stone.
-- Lighting: one hard-shadow directional `Sun`, flat ambient. Baking, probes and the day/golden-hour driver are M3.
+- **Lighting is done (M3).** One mixed hard-shadow directional `Sun` (the only realtime light), two baked warm rectangle lights over the counter, one baked point light at the fridge, a light-probe group (counter, fridge, door, 5x3 patio grid), one baked 128 px reflection probe, two 1024 lightmaps. Interior is warm (3500 K), exterior cool (5600 K).
+- **P2: hook the sun to the round clock.** `Lighting/SunCycle` (`CanteenRush.World.SunCycle`) needs one line in your `GameManager` wiring: `GameEvents.OnRoundTimeChanged += t => sunCycle.SetRemaining(t, config.RoundSeconds);` (find it with `FindFirstObjectByType<SunCycle>()`). It shifts sun elevation 55 to 12 degrees, 5600 to 3800 K, ambient, fog and sky exposure at 10 Hz and allocates nothing.
+- **P3: audio zones.** Add your `AudioZoneTrigger` component to `World/AudioZones/AudioZone_Indoor` and `AudioZone_Outdoor` (BoxColliders are already there). Do not move or resize them; ask P1.
+- **P3: it is a rooftop.** Outdoors means 13 floors up: a steady wind bed fits better than birds or traffic nearby, with a faint far-off campus hum from below; the parapet is the only thing between the player and the drop, so a little wind gust near it is a cheap cue.
+- **Prefabs** `Assets/Prefabs/World/Canteen.prefab`, `Patio.prefab`, `Backdrop.prefab` are the scene's connected world assemblies. Never edit them; they are regenerated.
+- **Decor you do not own and should not touch:** 3 backdrop modules, 6 plant pots (`World/Patio/Plants`, on the `Environment` layer so they do carve the NavMesh a little), invisible `World/Boundary` walls, `Lighting/PerfProbe` markers.
 
 ## 3. Art you can already use (`Assets/Art`, see `docs/PIPELINE_STATUS.md`)
 
-`Items/Item_Donut|Cola|Shake|Cake|Cup.fbx` (the cup has a `Cup_Water` child to toggle), `Props/Prop_Tray|TrayRack|CupDispenser|TablePatio|ChairBlue.fbx`, `Environment/Env_Canteen|Env_Patio.fbx`. Items are centred or base-centred at their own origin, real-world metres. Use them as the `Visual` child of your prefabs (art-swap rule); the colliders are yours.
+`Items/Item_Donut|Cola|Shake|Cake|Cup.fbx` (the cup has a `Cup_Water` child to toggle), `Props/Prop_Tray|TrayRack|CupDispenser|TablePatio|ChairBlue.fbx`, `Environment/Env_Canteen|Env_Patio.fbx`. Items are centred or base-centred at their own origin, real-world metres. Materials are real URP/Lit assets now (`Assets/Art/Materials/M_<Module>__<name>.mat`), shared across prefabs and GPU-instancing enabled; do not create per-prefab copies. Use them as the `Visual` child of your prefabs (art-swap rule); the colliders are yours.
 
 ## 4. Known gaps and things to expect
 
-- The shake is brown and the cake dark grey (their label textures were lost); recoloured in M2.
+- The shake is brown and the cake dark grey: their label textures were never supplied, so they stay flat-coloured (a deliberate cut, `docs/DECISIONS.md`).
 - Water cooler: bottle and pump are one mesh. Make the pump a separate invisible interactable collider over the pump head.
-- The canteen aisle between the cases and the fridge is about 1 m. If it feels too tight P1 will slide the fridge; tell P1 rather than moving it yourself.
-- The fence is a plain wall for now.
+- The aisle between the cases and the fridge is 1.66 m (the fridge was already slid 0.6 m). If it still feels tight in the headset tell P1.
+- The fence is a plain wall (the dot pattern is lost; an alpha texture is a polish item, not a requirement).
+- Real-world tooling: after any art change run `tools/run_world_pipeline.sh` (materials, scene, bake, occlusion, verify, stats, screenshots). A scene rebuild discards the lightmaps, so the script always bakes after building.
 - `Cr.Core` does not exist yet (P2's M0 task). `Cr.World` deliberately does not reference it.
 
 ## 5. Type-checking without a license
