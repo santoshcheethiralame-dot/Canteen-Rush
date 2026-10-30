@@ -20,7 +20,8 @@ namespace CanteenRush.World.Editor
             importer.importAnimation = false;
             importer.animationType = ModelImporterAnimationType.None;
             importer.addCollider = false;
-            importer.isReadable = false;
+            // Environment meshes stay readable: the NavMesh bake, MeshColliders and chair-facing detection read them.
+            importer.isReadable = assetPath.Contains("/Environment/") || assetPath.EndsWith("Prop_ChairBlue.fbx");
             importer.meshCompression = ModelImporterMeshCompression.Medium;
             importer.importNormals = ModelImporterNormals.Import;
             importer.importTangents = ModelImporterTangents.CalculateMikk;

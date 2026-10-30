@@ -44,7 +44,8 @@ Cr.Gameplay      -> Cr.Core, Unity.XR.Interaction.Toolkit, Unity.InputSystem, Un
 Cr.Audio         -> Cr.Core            (NO reference to Cr.Gameplay, Cr.Haptics, Cr.UI)
 Cr.Haptics       -> Cr.Core, Unity.XR.Interaction.Toolkit   (NO reference to Cr.Gameplay, Cr.Audio, Cr.UI)
 Cr.UI            -> Cr.Core, Unity.TextMeshPro, Unity.XR.Interaction.Toolkit
-Cr.World         -> Cr.Core
+Cr.World         -> Unity.AI.Navigation   (no Cr.Core reference: world markers are plain components that gameplay reads)
+Cr.World.Editor  -> Cr.World, Unity.AI.Navigation   (editor only: MainSceneBuilder, FbxImportDefaults)
 Cr.Tests.EditMode-> Cr.Core (+ Cr.Gameplay only for pure-logic classes), UnityEngine.TestRunner, UnityEditor.TestRunner, nunit
 ```
 Audio, Haptics and UI are listeners: they subscribe to `GameEvents` and must never call into Gameplay. Gameplay must never call them.
@@ -346,8 +347,9 @@ Every prefab: root GameObject (logic + collider + Rigidbody), child `Visual` (re
 | `Station_ItemSpawner` | none (invisible marker) | `ItemSpawner(ItemId, respawn)` | n/a (items appear on plates/shelves) |
 | `Customer` | capsule + sphere | NavMeshAgent, `Customer` state machine, bubble anchor | none (primitive, final) |
 | `Table_ServeSocket` | transparent box (editor-visible, runtime-hidden) | socket accepting `Tray`, `ServeSocket(seatIndex)` | n/a |
-| `Marker_SeatPoint` | empty with gizmo | tag `SeatPoint`, `SeatPoint(seatIndex 0..7, facing)` — P1 places | n/a |
-| `Marker_CustomerEntrance` | empty | tag only | n/a |
+| `SeatPoint_0..7` | (generated, not a prefab) | tag `SeatPoint`, component `CanteenRush.World.SeatPoint` (`Index` 0..7; `forward` = toward the table). Created by `MainSceneBuilder` under `World/Patio/SeatPoints`; find with `FindObjectsByType<SeatPoint>` | n/a |
+| `Spawn_<Item>_NN` | (generated) | component `CanteenRush.World.SpawnPoint` (`ItemKey` = Donut, Cola, Shake, Cake or Cup) under `Stations/SpawnPoints`; P2 places its `ItemSpawner` prefab at each | n/a |
+| `Marker_CustomerEntrance` | (generated) | plain GameObject at the far end of the patio, found by name; `forward` points into the patio | n/a |
 
 Seat indices 0..7: tables numbered 0..3 in the order given in `docs/LAYOUT.md`; seats `2t` and `2t+1` are the two gameplay chairs at table `t`.
 

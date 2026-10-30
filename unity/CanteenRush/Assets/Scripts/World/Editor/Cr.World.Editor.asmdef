@@ -1,7 +1,10 @@
 {
     "name": "Cr.World.Editor",
     "rootNamespace": "CanteenRush.World.Editor",
-    "references": [],
+    "references": [
+        "Cr.World",
+        "Unity.AI.Navigation"
+    ],
     "includePlatforms": [
         "Editor"
     ],
