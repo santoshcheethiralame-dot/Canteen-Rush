@@ -11,7 +11,7 @@ props procedurally instead of reading a source file. Everything is written to
   <out>/<category>/<module>.fbx   and   <out>/Materials/source/<module>.materials.json
 plus <out>/build_report.json. Exit code 1 if any budget or dimension check fails. Safe to re-run.
 
-Group keys: name, objects (regexes, fullmatch on object names), take (keep first N matches),
+Group keys: name, objects (regexes, fullmatch on object names), take (keep first N matches), offset ([x,y,z] source metres, moves the group),
   target_tris, pivot (keep|center|base|point), pivot_point [x,y,z] in SOURCE world metres (before module scale),
   place (zero: node at world origin | keep: node stays where the pivot is in the source frame),
   proxy ("bbox": replace the matched objects by one box of their bounds), height_m / max_extent_m ([lo,hi]).
@@ -180,6 +180,8 @@ def process_group(g, scale):
     bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
     if scale != 1.0:
         obj.data.transform(Matrix.Scale(scale, 4))
+    if g.get("offset"):
+        obj.data.transform(Matrix.Translation(Vector(g["offset"]) * scale))
 
     bm = bmesh.new(); bm.from_mesh(obj.data)
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)
@@ -205,7 +207,7 @@ def process_group(g, scale):
     elif mode == "base":
         pivot = Vector((c.x, c.y, mn.z))
     elif mode == "point":
-        pivot = Vector(g["pivot_point"]) * scale
+        pivot = (Vector(g["pivot_point"]) + Vector(g.get("offset", (0, 0, 0)))) * scale
     else:
         pivot = Vector((0, 0, 0))
     obj.data.transform(Matrix.Translation(-pivot))

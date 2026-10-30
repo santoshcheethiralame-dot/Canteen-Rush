@@ -2,84 +2,510 @@
   "_comment": "Per-module build config; schema in the docstring of build_world.py. Source coordinates are Blender world metres. scale is uniform, about the world origin (see docs/05_ASSET_BIBLE.md section 2). Scale factors for Parts 1/2/4 and the washroom are still estimates.",
   "modules": {
     "Item_Donut": {
-      "file": "Outdoor/Part 1/Copy of canteen.blend", "category": "Items",
-      "groups": [{"name": "Item_Donut", "objects": ["Dough"], "target_tris": 2000, "pivot": "center", "place": "zero", "height_m": [0.08, 0.20], "max_extent_m": [0.25, 0.40]}]
+      "file": "Outdoor/Part 1/Copy of canteen.blend",
+      "category": "Items",
+      "groups": [
+        {
+          "name": "Item_Donut",
+          "objects": [
+            "Dough"
+          ],
+          "target_tris": 2000,
+          "pivot": "center",
+          "place": "zero",
+          "height_m": [
+            0.08,
+            0.2
+          ],
+          "max_extent_m": [
+            0.25,
+            0.4
+          ]
+        }
+      ]
     },
     "Item_Cola": {
-      "file": "Outdoor/Part 1/Copy of canteen.blend", "category": "Items",
-      "groups": [{"name": "Item_Cola", "objects": ["pepsi(\\.\\d+)?"], "take": 1, "target_tris": 800, "pivot": "base", "place": "zero", "height_m": [0.25, 0.40], "max_extent_m": [0.25, 0.40]}]
+      "file": "Outdoor/Part 1/Copy of canteen.blend",
+      "category": "Items",
+      "groups": [
+        {
+          "name": "Item_Cola",
+          "objects": [
+            "pepsi(\\.\\d+)?"
+          ],
+          "take": 1,
+          "target_tris": 800,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.25,
+            0.4
+          ],
+          "max_extent_m": [
+            0.25,
+            0.4
+          ]
+        }
+      ]
     },
     "Item_Shake": {
-      "file": "Outdoor/Part 1/Copy of canteen.blend", "category": "Items",
-      "groups": [{"name": "Item_Shake", "objects": ["Object001"], "target_tris": 1500, "pivot": "base", "place": "zero", "height_m": [0.45, 0.75], "max_extent_m": [0.45, 0.75]}]
+      "file": "Outdoor/Part 1/Copy of canteen.blend",
+      "category": "Items",
+      "groups": [
+        {
+          "name": "Item_Shake",
+          "objects": [
+            "Object001"
+          ],
+          "target_tris": 1500,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.45,
+            0.75
+          ],
+          "max_extent_m": [
+            0.45,
+            0.75
+          ]
+        }
+      ]
     },
     "Item_Cake": {
-      "file": "Outdoor/Part 1/Copy of canteen.blend", "category": "Items",
-      "groups": [{"name": "Item_Cake", "objects": ["Cylinder"], "target_tris": 3000, "pivot": "base", "place": "zero", "height_m": [0.30, 0.55], "max_extent_m": [0.35, 0.65]}]
+      "file": "Outdoor/Part 1/Copy of canteen.blend",
+      "category": "Items",
+      "groups": [
+        {
+          "name": "Item_Cake",
+          "objects": [
+            "Cylinder"
+          ],
+          "target_tris": 3000,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.3,
+            0.55
+          ],
+          "max_extent_m": [
+            0.35,
+            0.65
+          ]
+        }
+      ]
     },
     "Item_Cup": {
-      "generate": "cup", "category": "Items",
+      "generate": "cup",
+      "category": "Items",
       "groups": [
-        {"name": "Item_Cup", "objects": ["Item_Cup"], "target_tris": 300, "pivot": "keep", "place": "zero", "height_m": [0.08, 0.12]},
-        {"name": "Cup_Water", "objects": ["Cup_Water"], "target_tris": 100, "pivot": "keep", "place": "zero"}]
+        {
+          "name": "Item_Cup",
+          "objects": [
+            "Item_Cup"
+          ],
+          "target_tris": 300,
+          "pivot": "keep",
+          "place": "zero",
+          "height_m": [
+            0.08,
+            0.12
+          ]
+        },
+        {
+          "name": "Cup_Water",
+          "objects": [
+            "Cup_Water"
+          ],
+          "target_tris": 100,
+          "pivot": "keep",
+          "place": "zero"
+        }
+      ]
     },
     "Prop_Tray": {
-      "generate": "tray", "category": "Props",
-      "groups": [{"name": "Prop_Tray", "objects": ["Prop_Tray"], "target_tris": 200, "pivot": "keep", "place": "zero", "max_extent_m": [0.40, 0.50]}]
+      "generate": "tray",
+      "category": "Props",
+      "groups": [
+        {
+          "name": "Prop_Tray",
+          "objects": [
+            "Prop_Tray"
+          ],
+          "target_tris": 200,
+          "pivot": "keep",
+          "place": "zero",
+          "max_extent_m": [
+            0.4,
+            0.5
+          ]
+        }
+      ]
     },
     "Prop_TrayRack": {
-      "generate": "rack", "category": "Props",
-      "groups": [{"name": "Prop_TrayRack", "objects": ["Prop_TrayRack"], "target_tris": 200, "pivot": "keep", "place": "zero"}]
+      "generate": "rack",
+      "category": "Props",
+      "groups": [
+        {
+          "name": "Prop_TrayRack",
+          "objects": [
+            "Prop_TrayRack"
+          ],
+          "target_tris": 200,
+          "pivot": "keep",
+          "place": "zero"
+        }
+      ]
     },
     "Prop_CupDispenser": {
-      "generate": "dispenser", "category": "Props",
-      "groups": [{"name": "Prop_CupDispenser", "objects": ["Prop_CupDispenser"], "target_tris": 250, "pivot": "keep", "place": "zero"}]
+      "generate": "dispenser",
+      "category": "Props",
+      "groups": [
+        {
+          "name": "Prop_CupDispenser",
+          "objects": [
+            "Prop_CupDispenser"
+          ],
+          "target_tris": 250,
+          "pivot": "keep",
+          "place": "zero"
+        }
+      ]
     },
     "Env_Canteen": {
-      "file": "Outdoor/Part 1/Copy of canteen.blend", "category": "Environment", "scale": 1.0,
+      "file": "Outdoor/Part 1/Copy of canteen.blend",
+      "category": "Environment",
+      "scale": 1.0,
       "groups": [
-        {"name": "Shell", "objects": ["cafeteria"], "target_tris": 300, "pivot": "keep", "place": "keep", "height_m": [3.0, 3.6]},
-        {"name": "DisplayCase_A", "objects": ["Cube"], "target_tris": 300, "pivot": "keep", "place": "keep"},
-        {"name": "DisplayCase_B", "objects": ["Cube\\.001"], "target_tris": 300, "pivot": "keep", "place": "keep"},
-        {"name": "Counter_A", "objects": ["Cube\\.002"], "target_tris": 60, "pivot": "keep", "place": "keep"},
-        {"name": "Counter_B", "objects": ["Cube\\.003"], "target_tris": 60, "pivot": "keep", "place": "keep"},
-        {"name": "Plates", "objects": ["Circle(\\.\\d+)?"], "target_tris": 2200, "pivot": "keep", "place": "keep"},
-        {"name": "FridgeBody", "objects": ["fridge", "shelf(\\.\\d+)?", "shelf edge(\\.\\d+)?", "divider", "drawer(\\.\\d+)?", "large drawer(\\.\\d+)?", "hinge(\\.\\d+)?", "leg(\\.\\d+)?"], "target_tris": 5000, "pivot": "keep", "place": "keep"},
-        {"name": "Door_Upper", "objects": ["door\\.001", "handle"], "target_tris": 300, "pivot": "point", "pivot_point": [-0.7, -0.9, 1.6], "place": "keep"},
-        {"name": "Door_Lower", "objects": ["door", "handle\\.001"], "target_tris": 300, "pivot": "point", "pivot_point": [-0.7, -0.9, 0.5], "place": "keep"},
-        {"name": "Fixtures", "objects": ["light", "light box", "fan\\s*", "fan box"], "target_tris": 1500, "pivot": "keep", "place": "keep"},
-        {"name": "WaterCooler", "objects": ["WaterPump_low"], "target_tris": 3000, "pivot": "keep", "place": "keep"}
+        {
+          "name": "Shell",
+          "objects": [
+            "cafeteria"
+          ],
+          "target_tris": 300,
+          "pivot": "keep",
+          "place": "keep",
+          "height_m": [
+            3.0,
+            3.6
+          ]
+        },
+        {
+          "name": "DisplayCase_A",
+          "objects": [
+            "Cube"
+          ],
+          "target_tris": 300,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "DisplayCase_B",
+          "objects": [
+            "Cube\\.001"
+          ],
+          "target_tris": 300,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Counter_A",
+          "objects": [
+            "Cube\\.002"
+          ],
+          "target_tris": 60,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Counter_B",
+          "objects": [
+            "Cube\\.003"
+          ],
+          "target_tris": 60,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Plates",
+          "objects": [
+            "Circle(\\.\\d+)?"
+          ],
+          "target_tris": 2200,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "FridgeBody",
+          "objects": [
+            "fridge",
+            "shelf(\\.\\d+)?",
+            "shelf edge(\\.\\d+)?",
+            "divider",
+            "drawer(\\.\\d+)?",
+            "large drawer(\\.\\d+)?",
+            "hinge(\\.\\d+)?",
+            "leg(\\.\\d+)?"
+          ],
+          "target_tris": 5000,
+          "pivot": "keep",
+          "place": "keep",
+          "offset": [
+            0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Door_Upper",
+          "objects": [
+            "door\\.001",
+            "handle"
+          ],
+          "target_tris": 300,
+          "pivot": "point",
+          "pivot_point": [
+            -0.7,
+            -0.9,
+            1.6
+          ],
+          "place": "keep",
+          "offset": [
+            0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Door_Lower",
+          "objects": [
+            "door",
+            "handle\\.001"
+          ],
+          "target_tris": 300,
+          "pivot": "point",
+          "pivot_point": [
+            -0.7,
+            -0.9,
+            0.5
+          ],
+          "place": "keep",
+          "offset": [
+            0.6,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Fixtures",
+          "objects": [
+            "light",
+            "light box",
+            "fan\\s*",
+            "fan box"
+          ],
+          "target_tris": 1500,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "WaterCooler",
+          "objects": [
+            "WaterPump_low"
+          ],
+          "target_tris": 3000,
+          "pivot": "keep",
+          "place": "keep"
+        }
       ],
       "markers": [
-        {"name_prefix": "Spawn_Donut", "objects": ["Dough(\\.\\d+)?"], "anchor": "center"},
-        {"name_prefix": "Spawn_Cola", "objects": ["pepsi(\\.\\d+)?"], "anchor": "base"},
-        {"name_prefix": "Spawn_Shake", "objects": ["Object001(\\.\\d+)?"], "anchor": "base"},
-        {"name_prefix": "Spawn_Cake", "objects": ["Cylinder"], "anchor": "base"},
-        {"name_prefix": "Spawn_Cup", "objects": ["cup"], "anchor": "base"}
+        {
+          "name_prefix": "Spawn_Donut",
+          "objects": [
+            "Dough(\\.\\d+)?"
+          ],
+          "anchor": "center"
+        },
+        {
+          "name_prefix": "Spawn_Shake",
+          "objects": [
+            "Object001(\\.\\d+)?"
+          ],
+          "anchor": "base"
+        },
+        {
+          "name_prefix": "Spawn_Cake",
+          "objects": [
+            "Cylinder"
+          ],
+          "anchor": "base"
+        },
+        {
+          "name_prefix": "Spawn_Cup",
+          "objects": [
+            "cup"
+          ],
+          "anchor": "base"
+        },
+        {
+          "name": "Spawn_Cola_00",
+          "point": [
+            0.2,
+            -0.7,
+            1.21
+          ]
+        },
+        {
+          "name": "Spawn_Cola_01",
+          "point": [
+            0.2,
+            -0.3,
+            1.21
+          ]
+        }
       ]
     },
     "Prop_TablePatio": {
-      "file": "Outdoor/Part 3/Copy of Part3_final.blend", "category": "Props", "scale": 0.1,
-      "groups": [{"name": "Prop_TablePatio", "objects": ["Cube_Cube\\.001"], "target_tris": 250, "pivot": "base", "place": "zero", "height_m": [0.65, 0.80], "max_extent_m": [1.9, 2.5]}]
+      "file": "Outdoor/Part 3/Copy of Part3_final.blend",
+      "category": "Props",
+      "scale": 0.1,
+      "groups": [
+        {
+          "name": "Prop_TablePatio",
+          "objects": [
+            "Cube_Cube\\.001"
+          ],
+          "target_tris": 250,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.65,
+            0.8
+          ],
+          "max_extent_m": [
+            1.9,
+            2.5
+          ]
+        }
+      ]
     },
     "Prop_ChairBlue": {
-      "file": "Outdoor/Part 3/Copy of Part3_final.blend", "category": "Props", "scale": 0.1,
-      "groups": [{"name": "Prop_ChairBlue", "objects": ["Cube_Cube\\.026"], "target_tris": 1200, "pivot": "base", "place": "zero", "height_m": [0.85, 1.05], "max_extent_m": [0.85, 1.05]}]
+      "file": "Outdoor/Part 3/Copy of Part3_final.blend",
+      "category": "Props",
+      "scale": 0.1,
+      "groups": [
+        {
+          "name": "Prop_ChairBlue",
+          "objects": [
+            "Cube_Cube\\.026"
+          ],
+          "target_tris": 1200,
+          "pivot": "base",
+          "place": "zero",
+          "height_m": [
+            0.85,
+            1.05
+          ],
+          "max_extent_m": [
+            0.85,
+            1.05
+          ]
+        }
+      ]
     },
     "Env_Patio": {
-      "file": "Outdoor/Part 3/Copy of Part3_final.blend", "category": "Environment", "scale": 0.1,
+      "file": "Outdoor/Part 3/Copy of Part3_final.blend",
+      "category": "Environment",
+      "scale": 0.1,
       "groups": [
-        {"name": "Ground", "objects": ["Plane"], "target_tris": 10, "pivot": "keep", "place": "keep", "max_extent_m": [15.0, 18.0]},
-        {"name": "Fence", "objects": ["partition\\.021"], "proxy": "bbox", "target_tris": 20, "pivot": "keep", "place": "keep", "max_extent_m": [15.0, 18.0]},
-        {"name": "Building", "objects": ["Cube\\.005"], "target_tris": 3600, "pivot": "keep", "place": "keep"},
-        {"name": "Planter", "objects": ["Cube\\.002"], "target_tris": 200, "pivot": "keep", "place": "keep"},
-        {"name": "Frames", "objects": ["Cylinder\\.00[123]"], "target_tris": 2000, "pivot": "keep", "place": "keep"},
-        {"name": "Doors", "objects": ["door_Plane", "door\\.001_Plane\\.001"], "target_tris": 600, "pivot": "keep", "place": "keep"},
-        {"name": "Panels", "objects": ["Cube(?!\\.00[25]$)(\\.\\d+)?"], "target_tris": 600, "pivot": "keep", "place": "keep"}
+        {
+          "name": "Ground",
+          "objects": [
+            "Plane"
+          ],
+          "target_tris": 10,
+          "pivot": "keep",
+          "place": "keep",
+          "max_extent_m": [
+            15.0,
+            18.0
+          ]
+        },
+        {
+          "name": "Fence",
+          "objects": [
+            "partition\\.021"
+          ],
+          "proxy": "bbox",
+          "target_tris": 20,
+          "pivot": "keep",
+          "place": "keep",
+          "max_extent_m": [
+            15.0,
+            18.0
+          ]
+        },
+        {
+          "name": "Building",
+          "objects": [
+            "Cube\\.005"
+          ],
+          "target_tris": 3600,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Planter",
+          "objects": [
+            "Cube\\.002"
+          ],
+          "target_tris": 200,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Frames",
+          "objects": [
+            "Cylinder\\.00[123]"
+          ],
+          "target_tris": 2000,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Doors",
+          "objects": [
+            "door_Plane",
+            "door\\.001_Plane\\.001"
+          ],
+          "target_tris": 600,
+          "pivot": "keep",
+          "place": "keep"
+        },
+        {
+          "name": "Panels",
+          "objects": [
+            "Cube(?!\\.00[25]$)(\\.\\d+)?"
+          ],
+          "target_tris": 600,
+          "pivot": "keep",
+          "place": "keep"
+        }
       ],
       "markers": [
-        {"name_prefix": "Table", "objects": ["Cube_Cube\\.(001|002|003|121)"], "anchor": "base"},
-        {"name_prefix": "Chair", "objects": ["Cube_Cube(?!\\.(001|002|003|121)$)(\\.\\d+)?"], "anchor": "base"}
+        {
+          "name_prefix": "Table",
+          "objects": [
+            "Cube_Cube\\.(001|002|003|121)"
+          ],
+          "anchor": "base"
+        },
+        {
+          "name_prefix": "Chair",
+          "objects": [
+            "Cube_Cube(?!\\.(001|002|003|121)$)(\\.\\d+)?"
+          ],
+          "anchor": "base"
+        }
       ]
     }
   }

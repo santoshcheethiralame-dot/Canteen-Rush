@@ -4,6 +4,7 @@ using Unity.AI.Navigation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace CanteenRush.World.Editor
 {
@@ -16,7 +17,7 @@ namespace CanteenRush.World.Editor
     {
         const string ScenePath = "Assets/Scenes/Main.unity";
         const string NavMeshPath = "Assets/Scenes/Main_NavMesh.asset";
-        const float PatioDistance = 16f;      // shell centre -> patio ground centre along the open side
+        const float PatioDistance = 22f;      // shell centre -> patio ground centre along the open side
         const float TableRadius = 1.9f;       // chairs within this of a table belong to it
 
         [MenuItem("Canteen Rush/World/Build Main Scene")]
@@ -74,6 +75,12 @@ namespace CanteenRush.World.Editor
                 if (t == null) continue;
                 SetLayer(t.gameObject, env); StaticFlags(t.gameObject);
                 if (n == "Fence") AddBoxColliders(t.gameObject); else t.gameObject.AddComponent<MeshCollider>();
+                if (n != "Ground")
+                {
+                    // roofs and ledges must not become walkable islands (the entrance once snapped onto the building roof)
+                    var mod = t.gameObject.AddComponent<NavMeshModifier>();
+                    mod.overrideArea = true; mod.area = 1;   // area 1 = Not Walkable
+                }
             }
             Ground(ground.gameObject, "SurfaceStone");
             Bounds groundB = Rb(ground.gameObject);
@@ -139,10 +146,7 @@ namespace CanteenRush.World.Editor
                     sp.AddComponent<SeatPoint>().Index = ti * 2 + k;
                 }
             }
-            var entrance = new GameObject("Marker_CustomerEntrance");
-            entrance.transform.SetParent(patioRoot.transform, false);
-            entrance.transform.position = Flat(groundB.center) + dir * (Mathf.Abs(Vector3.Dot(groundB.size, dir)) * 0.5f - 0.6f);
-            entrance.transform.rotation = Quaternion.LookRotation(-dir, Vector3.up);
+            Vector3 entranceWanted = Flat(groundB.center) + dir * (Mathf.Abs(Vector3.Dot(groundB.size, dir)) * 0.5f - 0.6f);
 
             // ---- stations: spawn points, optional gameplay prefabs from P2 ----
             foreach (var m in Markers(canteen.transform, "Spawn_"))
@@ -197,6 +201,13 @@ namespace CanteenRush.World.Editor
             surface.BuildNavMesh();
             if (surface.navMeshData != null) AssetDatabase.CreateAsset(surface.navMeshData, NavMeshPath);
             world.AddComponent<NavMeshBootstrap>();
+
+            // entrance: the far end of the patio, snapped to the nearest walkable point (the service building may occupy the end)
+            NavMeshHit eh;
+            if (NavMesh.SamplePosition(entranceWanted, out eh, 8f, NavMesh.AllAreas)) entranceWanted = eh.position;
+            var entrance = new GameObject("Marker_CustomerEntrance");
+            entrance.transform.SetParent(patioRoot.transform, false);
+            entrance.transform.SetPositionAndRotation(entranceWanted, Quaternion.LookRotation(-dir, Vector3.up));
 
             System.IO.Directory.CreateDirectory("Assets/Scenes");
             EditorSceneManager.SaveScene(scene, ScenePath);
@@ -324,7 +335,7 @@ namespace CanteenRush.World.Editor
         }
 
         // Which way the chair mesh faces, in its own XZ plane: opposite the backrest.
-        static Vector3 ChairFront(GameObject chairPrefab)
+        internal static Vector3 ChairFront(GameObject chairPrefab)
         {
             Vector3 fallback = Vector3.forward;
             if (chairPrefab == null) return fallback;

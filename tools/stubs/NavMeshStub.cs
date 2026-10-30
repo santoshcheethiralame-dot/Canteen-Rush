@@ -1,5 +1,9 @@
 namespace Unity.AI.Navigation {
   public enum CollectObjects { All = 0, Volume = 1, Children = 2, MarkedWithModifier = 3 }
+  public class NavMeshModifier : UnityEngine.MonoBehaviour {
+    public bool overrideArea { get; set; }
+    public int area { get; set; }
+  }
   public class NavMeshSurface : UnityEngine.MonoBehaviour {
     public CollectObjects collectObjects { get; set; }
     public UnityEngine.LayerMask layerMask { get; set; }
