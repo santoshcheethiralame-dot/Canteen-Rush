@@ -2,6 +2,11 @@
 
 Newest first. One line per decision or measured fact; the reasoning is in `docs/DECISIONS.md`, the layout in `docs/LAYOUT.md`, the numbers in `docs/PERF_REPORT.md`.
 
+## 2026-10-30 (round 7: measured and shipped)
+- Windows player built (107 MB, 40.9 MB zipped) and measured with `PerfProbe` on an Iris Xe laptop: 7.6-7.8 ms (PC level), 3.5-3.8 ms (Quest-class level) at 1600x900; 58k-100k visible triangles. Full table, caveats and the VR extrapolation (about 12 ms GPU at Quest 2 pixel count on this GPU) in `docs/PERF_REPORT.md`.
+- Probe fixes: marker names are case-sensitive; the Quest-class quality level was excluded from Standalone builds, so it silently fell back to PC. Removed that exclusion in `QualitySettings.asset` (Windows default stays PC).
+- Remaining for P1: swap `Visual` children once P2 pushes prefabs; re-measure after gameplay integration; optional polish listed below.
+
 ## 2026-10-30 (round 6: canopy and grill)
 - User correction: the trees hold the roof; add a floor-to-roof grid grill on the sides. Built `World/Canopy` (slab, 12 columns = 4 instances of the 3-column `Env_Skyline`) and `GridGrill` (new Cr.World component). Verified headless: 222 NavMesh triangles, entrance on the NavMesh, 8/8 seats reachable (8.0-18.1 m from the entrance, 8.4-17.0 m from the player start), 24/24 chairs facing tables, 1 lightmap of 1024, 109k triangles.
 

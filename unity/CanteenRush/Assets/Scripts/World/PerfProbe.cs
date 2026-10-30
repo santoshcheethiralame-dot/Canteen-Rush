@@ -55,7 +55,7 @@ namespace CanteenRush.World
 
             for (int s = 0; s < Spots.Length; s++)
             {
-                var m = GameObject.Find("Marker_Perf_" + Spots[s]);
+                var m = GameObject.Find("Marker_Perf_" + char.ToUpperInvariant(Spots[s][0]) + Spots[s].Substring(1));
                 if (m == null || cam == null) { sb.Append("    {\"spot\": \"").Append(Spots[s]).Append("\", \"error\": \"marker or camera missing\"}").Append(s < Spots.Length - 1 ? ",\n" : "\n"); continue; }
                 cam.transform.SetPositionAndRotation(m.transform.position, m.transform.rotation);
                 if (sun != null && demo) sun.SetProgress(s * 0.5f);
