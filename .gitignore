@@ -1,0 +1,31 @@
+# Source drop (shared out-of-band, ~517 MB): never commit
+*.zip
+/source/
+*.blend
+*.blend1
+*.blend@
+
+# Unity (project lives in /unity/CanteenRush)
+/unity/**/[Ll]ibrary/
+/unity/**/[Tt]emp/
+/unity/**/[Oo]bj/
+/unity/**/[Bb]uild/
+/unity/**/[Bb]uilds/
+/unity/**/[Ll]ogs/
+/unity/**/[Uu]ser[Ss]ettings/
+/unity/**/[Mm]emoryCaptures/
+*.csproj
+*.sln
+*.suo
+*.user
+*.pidb.meta
+*.pdb.meta
+*.apk
+*.aab
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vs/
+.idea/
+__pycache__/
