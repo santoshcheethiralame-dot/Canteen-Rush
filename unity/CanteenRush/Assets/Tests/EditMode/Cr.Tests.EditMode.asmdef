@@ -1,0 +1,1 @@
+{"name":"Cr.Tests.EditMode","references":["Cr.Core","Cr.Gameplay","Cr.UIGameplay","Unity.XR.Interaction.Toolkit","Unity.InputSystem"],"optionalUnityReferences":["TestAssemblies"],"includePlatforms":["Editor"]}

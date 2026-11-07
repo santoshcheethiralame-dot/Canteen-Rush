@@ -1,0 +1,1 @@
+{"name":"Cr.Gameplay.Editor","references":["Cr.Core","Cr.Gameplay","Cr.World","Cr.UIGameplay","UnityEngine.UI","Unity.AI.Navigation","Unity.XR.Interaction.Toolkit","Unity.InputSystem"],"includePlatforms":["Editor"]}

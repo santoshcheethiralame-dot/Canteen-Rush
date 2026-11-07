@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a7ef8ebf1b406e8b63e221c70f1ab1, type: 3}
+  m_Name: Item_Cola
+  m_EditorClassIdentifier: 
+  Id: 2
+  DisplayName: Cola
+  Prefab: {fileID: 1786937383597716631, guid: bef95af30de166345978c2c4956f899e, type: 3}
+  Icon: {fileID: 21300000, guid: 0f2e411494ff81b41ad311de5926291c, type: 3}
+  AudioMaterial: 3
+  Mass: 0.3
+  RespawnSeconds: 6

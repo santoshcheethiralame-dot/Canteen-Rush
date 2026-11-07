@@ -1,0 +1,1 @@
+{"name":"Cr.Gameplay","references":["Cr.Core","Unity.XR.Interaction.Toolkit","Unity.InputSystem","Unity.AI.Navigation","Cr.World"]}

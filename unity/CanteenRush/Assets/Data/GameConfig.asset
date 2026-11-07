@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12002dbe46824424a32c08c305f77ee1, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  RoundSeconds: 180
+  WaveSeconds:
+  - 60
+  - 60
+  - 60
+  WaveMaxCustomers: 020000000300000004000000
+  WaveSpawnInterval:
+  - 14
+  - 11
+  - 9
+  PatienceBase: 25
+  PatiencePerItem: 15
+  PointsPerItem: 100
+  SpeedBonusMax: 50
+  ComboPerExtraItem: 0.25
+  WrongItemPenalty: 25
+  SpillPenalty: 10
+  TimeoutPenalty: 50
+  StarThresholds: 2c010000bc020000b0040000
+  DonutRespawn: 5
+  ShakeRespawn: 8
+  CakeRespawn: 10
+  ColaRespawn: 6
+  CupFillPerSecond: 0.25
+  TrayTiltWarnDeg: 20
+  TrayTiltSpillDeg: 35
+  SpillHeight: 0.3
+  EatSeconds: 4
+  TrayReturnSeconds: 3
+  MoveSpeed: 1.8
+  SnapTurnDeg: 45
+  Templates:
+  - {fileID: 11400000, guid: daffda42ca874f31b6c457a6a5a9cc74, type: 2}
+  - {fileID: 11400000, guid: eac3246c9ee64850be0637e6c337e4ba, type: 2}
+  - {fileID: 11400000, guid: fae4cfde6ac34167897c4002435a4839, type: 2}
+  - {fileID: 11400000, guid: d867ec6e47a24b9aba1ce706037a1eb6, type: 2}
+  - {fileID: 11400000, guid: 5de2017702b3494a93e5c93882342f79, type: 2}
+  - {fileID: 11400000, guid: 3469004bd8fb44f78370bda85471481c, type: 2}
+  - {fileID: 11400000, guid: 0247ec90072040698d87bbe0b0246346, type: 2}
+  - {fileID: 11400000, guid: 49e70b0c90be49349d145d679d882e67, type: 2}
+  - {fileID: 11400000, guid: 51b991dbac804d8097b94441e2479625, type: 2}
+  - {fileID: 11400000, guid: ea86fef39bec4a5da6f0a07d228cde53, type: 2}
+  - {fileID: 11400000, guid: c50a2f083b864bf4bcb9c5b8ab34eaef, type: 2}
