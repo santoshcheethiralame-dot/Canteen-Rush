@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc757a7595fb20a721f871139a39fb, type: 3}
+  m_Name: Cue_release_soft
+  m_EditorClassIdentifier: 
+  CueId: release_soft
+  Variants:
+  - {fileID: 8300000, guid: af78851209987805cb749b0639498b81, type: 3}
+  - {fileID: 8300000, guid: beb90c30973c4329550c23c514438837, type: 3}
+  - {fileID: 8300000, guid: 43a74b8a6a979d81c366aaeef691755b, type: 3}
+  PitchRange: {x: 0.95, y: 1.05}
+  VolumeRange: {x: 0.6, y: 0.8}
+  MinDistance: 1
+  MaxDistance: 5
+  Loop: 0
+  Group: {fileID: 24300012, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  Spatial: 1
+  Bus: 0
+  Occludable: 0

@@ -1,0 +1,1 @@
+{"name":"Cr.Tests.PlayMode","rootNamespace":"CanteenRush.Tests.PlayMode","references":["Cr.Core","Cr.Audio","Cr.Haptics","Cr.UI","Cr.P3.Sandbox","UnityEngine.UI"],"optionalUnityReferences":["TestAssemblies"],"includePlatforms":["Editor"]}
