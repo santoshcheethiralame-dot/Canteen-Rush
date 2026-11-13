@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc757a7595fb20a721f871139a39fb, type: 3}
+  m_Name: Cue_item_drop
+  m_EditorClassIdentifier: 
+  CueId: item_drop
+  Variants:
+  - {fileID: 8300000, guid: 420f40819830da64bccb597622c9b8e9, type: 3}
+  - {fileID: 8300000, guid: 970a69ab5a5090827203d2f08ebd940a, type: 3}
+  PitchRange: {x: 0.93, y: 1.05}
+  VolumeRange: {x: 1, y: 1}
+  MinDistance: 1
+  MaxDistance: 12
+  Loop: 0
+  Group: {fileID: 24300012, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  Spatial: 1
+  Bus: 0
+  Occludable: 0

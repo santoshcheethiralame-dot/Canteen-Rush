@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc757a7595fb20a721f871139a39fb, type: 3}
+  m_Name: Cue_tray_clink
+  m_EditorClassIdentifier: 
+  CueId: tray_clink
+  Variants:
+  - {fileID: 8300000, guid: 0b9346a9da4cffd8922060b96ba31108, type: 3}
+  - {fileID: 8300000, guid: 99482f8c97fc0ec5380eff0e51cbe903, type: 3}
+  - {fileID: 8300000, guid: deaacf7143c94f656b092960960a8ba5, type: 3}
+  PitchRange: {x: 0.95, y: 1.05}
+  VolumeRange: {x: 1, y: 1}
+  MinDistance: 1
+  MaxDistance: 8
+  Loop: 0
+  Group: {fileID: 24300012, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  Spatial: 1
+  Bus: 0
+  Occludable: 0

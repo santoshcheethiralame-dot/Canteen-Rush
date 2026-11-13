@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc757a7595fb20a721f871139a39fb, type: 3}
+  m_Name: Cue_footsteps_stone
+  m_EditorClassIdentifier: 
+  CueId: footsteps_stone
+  Variants:
+  - {fileID: 8300000, guid: 55988798cbae4047400113ed4ebee0a9, type: 3}
+  - {fileID: 8300000, guid: 2435440a9fa7b28c51e50d950e01286e, type: 3}
+  - {fileID: 8300000, guid: 24b937c213d91ff3b48e7d3cfeb0a5da, type: 3}
+  PitchRange: {x: 0.92, y: 1.08}
+  VolumeRange: {x: 0.35, y: 0.45}
+  MinDistance: 1
+  MaxDistance: 5
+  Loop: 0
+  Group: {fileID: 24300012, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  Spatial: 0
+  Bus: 0
+  Occludable: 0

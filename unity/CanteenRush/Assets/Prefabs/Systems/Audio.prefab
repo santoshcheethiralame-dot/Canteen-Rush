@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &104798503312230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 104798503312231}
+  - component: {fileID: 104798503312240}
+  - component: {fileID: 104798503312241}
+  - component: {fileID: 104798503312242}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &104798503312231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104798503312230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &104798503312240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104798503312230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82240e2c09593100ee630026837caa35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cues:
+  - {fileID: 11400000, guid: 0b05be40c0086b8d033bd64d53067cc4, type: 2}
+  - {fileID: 11400000, guid: 18183f9b2d92a65454fa8ca0c203a973, type: 2}
+  - {fileID: 11400000, guid: 02442fd45918a16b3046233349a15be4, type: 2}
+  - {fileID: 11400000, guid: 8b349cff54874abe8f8ef0e876d68ffd, type: 2}
+  - {fileID: 11400000, guid: 5665d08d61d1cceb92aa8a72c026d6be, type: 2}
+  - {fileID: 11400000, guid: f57dddd8385bc6e2f7f1b0b9a406becf, type: 2}
+  - {fileID: 11400000, guid: 8db2dbde495972e1b1e902c6612e5536, type: 2}
+  - {fileID: 11400000, guid: 1861bb43f5b4139ee991eafdcb2ad471, type: 2}
+  - {fileID: 11400000, guid: 0066296d644ae203ddc8ba729fd22ed7, type: 2}
+  - {fileID: 11400000, guid: a46c9bdc7c3fd2cc4e8bc83217d11b44, type: 2}
+  - {fileID: 11400000, guid: bdf2fdf8a61f895285ebf96b37f637c7, type: 2}
+  - {fileID: 11400000, guid: ee5a0483a5325f5694f8a97b205ccd46, type: 2}
+  - {fileID: 11400000, guid: f7f734466e50db0399692c8ebb9c6b20, type: 2}
+  - {fileID: 11400000, guid: d82bad18722b9f127cf4c3e42b5dea1d, type: 2}
+  - {fileID: 11400000, guid: f45e22fd2153ba43ca2b4c2d62dc87d6, type: 2}
+  - {fileID: 11400000, guid: ea10ca1fddb842c985ff032684c7523c, type: 2}
+  - {fileID: 11400000, guid: 87f01aed23b2a0b9311ac9162bcd4401, type: 2}
+  - {fileID: 11400000, guid: 8c4a54faf0afb8f7f5a2d209ed793910, type: 2}
+  - {fileID: 11400000, guid: 2e0e3c8a85f60bf76b59d09a2f206a93, type: 2}
+  - {fileID: 11400000, guid: 92ad6dcc2c8f4d479a06a487db700694, type: 2}
+  - {fileID: 11400000, guid: 0830b996abb82f9784a90bfd7665fb6c, type: 2}
+  - {fileID: 11400000, guid: 88c0142306d58928c339b701094da7cd, type: 2}
+  _mixer: {fileID: 24100000, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  _poolSize: 12
+  _spread: 15
+--- !u!114 &104798503312241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104798503312230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd81514996963fce2566a6408c2e83db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audio: {fileID: 0}
+  _items:
+  - {fileID: 11400000, guid: 2fa6e0bf1e5949b5929a34e21b6e9ee7, type: 2}
+  - {fileID: 11400000, guid: 31cac2823c9e43a1b06b7216f568e846, type: 2}
+  - {fileID: 11400000, guid: 35ddd63e201247859fb78be7a5c0d3a3, type: 2}
+  - {fileID: 11400000, guid: 7f56f537d71c44f1859c2fff98086acf, type: 2}
+  - {fileID: 11400000, guid: 6b707a3b246f4d6a9c42296e3256dc17, type: 2}
+  _maxImpactSpeed: 4
+  _minImpactSpeed: 0.25
+  _waterPitchEmpty: 0.9
+  _waterPitchFull: 1.2
+  _crowdFullAt: 4
+  _fridgeHumOpenBoost: 0.6
+  _tiltRattleInterval: 0.25
+--- !u!114 &104798503312242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104798503312230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590637af19983b05da98eb9da20b3935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _birdRadius: 9
+  _birdHeight: 3
+  _fallbackFridge: {x: -0.5, y: 1.2, z: 1.5}
+  _fallbackPatio: {x: 0, y: 1.2, z: 14}
