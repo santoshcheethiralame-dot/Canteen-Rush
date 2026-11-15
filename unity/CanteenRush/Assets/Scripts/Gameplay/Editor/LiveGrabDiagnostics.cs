@@ -115,22 +115,28 @@ namespace CanteenRush.Gameplay.Editor
             {
                 bool selected = _donut.IsSelected && ReferenceEquals(_donut.GetComponent<XRGrabInteractable>().firstInteractorSelecting, _hand);
                 Log("LIVE MAIN keyboard grip selected donut: " + selected);
-                if (selected) _hand.transform.position += Vector3.up * .25f;
-                _wait = EditorApplication.timeSinceStartup + 20;
+                if (!selected) { Finish(); return; }
+                InputSystem.QueueStateEvent(_keyboard, new KeyboardState(Key.Space)); InputSystem.Update();
                 _frame = Time.frameCount + 5; _stage = 3;
             }
             else if (_stage == 3 && Time.frameCount >= _frame)
             {
-                ScreenCapture.CaptureScreenshot(Path.GetFullPath(Path.Combine(Application.dataPath, "../../../../p2-live-grab.png")));
-                _wait = EditorApplication.timeSinceStartup + 10; _stage = 4;
+                Log("LIVE MAIN donut stayed selected after G key-up: " + _donut.IsSelected);
+                _hand.transform.position += Vector3.up * .25f;
+                _frame = Time.frameCount + 10; _stage = 4;
             }
-            else if (_stage == 4 && EditorApplication.timeSinceStartup >= _wait - 1)
+            else if (_stage == 4 && Time.frameCount >= _frame)
             {
-                InputSystem.QueueStateEvent(_keyboard, new KeyboardState(Key.Space)); InputSystem.Update();
-                _frame = Time.frameCount + 5; _stage = 5; _wait = EditorApplication.timeSinceStartup + 10;
+                ScreenCapture.CaptureScreenshot(Path.GetFullPath(Path.Combine(Application.dataPath, "../../../../p2-live-grab.png")));
+                _frame = Time.frameCount + 5; _stage = 5;
             }
             else if (_stage == 5 && Time.frameCount >= _frame)
-            { Log("LIVE MAIN grip release released donut: " + !_donut.IsSelected); Finish(); }
+            {
+                InputSystem.QueueStateEvent(_keyboard, new KeyboardState(Key.Space, Key.G)); InputSystem.Update();
+                _frame = Time.frameCount + 5; _stage = 6;
+            }
+            else if (_stage == 6 && Time.frameCount >= _frame)
+            { Log("LIVE MAIN second G press released donut: " + !_donut.IsSelected); Finish(); }
         }
         static void Finish()
         {
