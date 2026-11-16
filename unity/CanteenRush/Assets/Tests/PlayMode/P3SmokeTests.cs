@@ -20,14 +20,15 @@ namespace CanteenRush.Tests.PlayMode
         public IEnumerator TearDown()
         {
             Time.timeScale = 1f;
-            yield return null;
+            if (Application.isPlaying) yield return new ExitPlayMode();
+            GameEvents.ResetAll();
         }
 
         // ---------- (a) ----------
         [UnityTest]
         public IEnumerator A1_SandboxLoadsWithAllP3Systems()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(5);
             Assert.NotNull(AudioService.Instance, "AudioService");
             Assert.AreEqual(AudioService.DefaultPoolSize, AudioService.Instance.PoolSize, "one-shot pool size");
             Assert.NotNull(Object.FindFirstObjectByType<HapticsServiceBase>(), "haptics service");
@@ -42,7 +43,7 @@ namespace CanteenRush.Tests.PlayMode
         [UnityTest]
         public IEnumerator A2_MainLoadsWithP3Systems()
         {
-            yield return P3TestUtil.Load(P3TestUtil.MainScene, 30);
+            P3TestUtil.Open(P3TestUtil.MainScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(30);
             Assert.NotNull(AudioService.Instance, "Audio installed in Main (prefab or Resources fallback)");
             Assert.NotNull(Object.FindFirstObjectByType<HapticsServiceBase>(), "Haptics installed in Main");
             Assert.NotNull(Object.FindFirstObjectByType<UiShell>(), "UI shell installed in Main");
@@ -53,7 +54,7 @@ namespace CanteenRush.Tests.PlayMode
         [UnityTest]
         public IEnumerator B_ScriptedRoundReachesResults()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(5);
             var shell = Object.FindFirstObjectByType<UiShell>();
             yield return SyntheticRound.Play(0f);
             yield return null;
@@ -79,7 +80,7 @@ namespace CanteenRush.Tests.PlayMode
         [UnityTest]
         public IEnumerator C1_EveryCueHasARealClip()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(5);
             var audio = AudioService.Instance;
             foreach (var id in AudioCueIds.All)
             {
@@ -98,7 +99,7 @@ namespace CanteenRush.Tests.PlayMode
         [UnityTest]
         public IEnumerator C2_EveryPresetResolvesAndMatchesTheSpecTable()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(5);
             var svc = Object.FindFirstObjectByType<HapticsServiceBase>();
             foreach (var name in HapticPresetNames.All) Assert.IsTrue(svc.TryGetPreset(name, out _), "preset missing: " + name);
             void Check(string n, float amp, float dur) { svc.TryGetPreset(n, out var p); Assert.AreEqual(amp, p.Amplitude, 1e-4f, n); Assert.AreEqual(dur, p.Duration, 1e-4f, n); }
@@ -111,14 +112,20 @@ namespace CanteenRush.Tests.PlayMode
             svc.TryGetPreset("TrayTiltWarn", out var tt); Assert.IsTrue(tt.IsRamp); Assert.AreEqual(0.15f, tt.RampAmplitudeFor(20), 1e-4f); Assert.AreEqual(0.70f, tt.RampAmplitudeFor(35), 1e-4f);
         }
 
+        static List<string> _presets, _cues;
+        static int _sent;
+        static void OnPreset(string n, Hand h) { _presets.Add(n); }
+        static void OnCue(string c, Vector3 p) { _cues.Add(c); }
+        static void OnPulse(HapticPulse p) { if (p.Hand == Hand.Left) _sent++; }
+
         [UnityTest]
         public IEnumerator C3_EventsSelectTheRightPresetAndPlayASound()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene);
-            var presets = new List<string>();
-            var cues = new List<string>();
-            System.Action<string, Hand> onPreset = (n, h) => presets.Add(n);
-            System.Action<string, Vector3> onCue = (c, p) => cues.Add(c);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(5);
+            _presets = new List<string>();
+            _cues = new List<string>();
+            System.Action<string, Hand> onPreset = OnPreset;
+            System.Action<string, Vector3> onCue = OnCue;
             HapticsServiceBase.PresetRequested += onPreset;
             AudioService.CuePlayed += onCue;
             try
@@ -126,11 +133,11 @@ namespace CanteenRush.Tests.PlayMode
                 var p = Vector3.forward * 3;
                 void Expect(System.Action raise, string preset, string cue)
                 {
-                    presets.Clear(); cues.Clear(); raise();
-                    if (preset != null) CollectionAssert.Contains(presets, preset, "preset for " + preset);
-                    if (cue != null) CollectionAssert.Contains(cues, cue, "cue " + cue);
+                    _presets.Clear(); _cues.Clear(); raise();
+                    if (preset != null) CollectionAssert.Contains(_presets, preset, "preset for " + preset);
+                    if (cue != null) CollectionAssert.Contains(_cues, cue, "cue " + cue);
                     // Every haptic pairs with a sound (MASTER_SPEC §11 principle).
-                    if (preset != null) Assert.IsNotEmpty(cues, "haptic " + preset + " has no paired sound");
+                    if (preset != null) Assert.IsNotEmpty(_cues, "haptic " + preset + " has no paired sound");
                 }
                 Expect(() => GameEvents.ItemGrabbed(ItemId.Donut, Hand.Left, p), "Grab", AudioCueIds.Grab);
                 Expect(() => GameEvents.ItemReleased(ItemId.Donut, Hand.Left, p), "Release", AudioCueIds.Release);
@@ -151,9 +158,9 @@ namespace CanteenRush.Tests.PlayMode
                 Expect(() => GameEvents.Footstep(Surface.Stone, p), null, AudioCueIds.FootstepsStone);
                 Expect(() => GameEvents.RoundStateChanged(RoundState.Results), null, AudioCueIds.RoundEnd);
                 // Ramps: requested on CupFilling / TrayTilt (> 20 deg only).
-                presets.Clear(); GameEvents.CupFilling(0.5f, Hand.Left); CollectionAssert.Contains(presets, "WaterFill");
-                presets.Clear(); GameEvents.TrayTilt(15f, Hand.Right); CollectionAssert.DoesNotContain(presets, "TrayTiltWarn");
-                presets.Clear(); GameEvents.TrayTilt(28f, Hand.Right); CollectionAssert.Contains(presets, "TrayTiltWarn");
+                _presets.Clear(); GameEvents.CupFilling(0.5f, Hand.Left); CollectionAssert.Contains(_presets, "WaterFill");
+                _presets.Clear(); GameEvents.TrayTilt(15f, Hand.Right); CollectionAssert.DoesNotContain(_presets, "TrayTiltWarn");
+                _presets.Clear(); GameEvents.TrayTilt(28f, Hand.Right); CollectionAssert.Contains(_presets, "TrayTiltWarn");
             }
             finally
             {
@@ -167,20 +174,20 @@ namespace CanteenRush.Tests.PlayMode
         [UnityTest]
         public IEnumerator C4_RateLimitAndDoublePulse()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(5);
             var svc = Object.FindFirstObjectByType<HapticsServiceBase>();
             svc.ResetTiming();
-            int sent = 0;
-            System.Action<HapticPulse> count = p => { if (p.Hand == Hand.Left) sent++; };
+            _sent = 0;
+            System.Action<HapticPulse> count = OnPulse;
             HapticsServiceBase.PulseSent += count;
             try
             {
                 svc.Play("Grab", Hand.Left); svc.Play("Grab", Hand.Left); svc.Play("Grab", Hand.Left);
-                Assert.AreEqual(1, sent, "three pulses inside 30 ms collapse to one");
-                svc.ResetTiming(); sent = 0;
+                Assert.AreEqual(1, _sent, "three pulses inside 30 ms collapse to one");
+                svc.ResetTiming(); _sent = 0;
                 svc.Play("ServeOk", Hand.Left);
                 yield return new WaitForSecondsRealtime(0.25f);
-                Assert.AreEqual(2, sent, "ServeOk is a double pulse");
+                Assert.AreEqual(2, _sent, "ServeOk is a double pulse");
             }
             finally { HapticsServiceBase.PulseSent -= count; }
         }
@@ -189,7 +196,7 @@ namespace CanteenRush.Tests.PlayMode
         [UnityTest]
         public IEnumerator D_E_ThreeRoundsNoLeaksAndSubscriptionsReturnToBaseline()
         {
-            yield return P3TestUtil.Load(P3TestUtil.SandboxScene, 10);
+            P3TestUtil.Open(P3TestUtil.SandboxScene); yield return new EnterPlayMode(); yield return P3TestUtil.Frames(10);
             yield return SyntheticRound.Play(0f);           // warm-up: first-use allocations (clips, curves, GUI)
             System.GC.Collect();
             var baseline = P3TestUtil.SubscriberCounts();
