@@ -107,7 +107,7 @@ public sealed class DesktopModeTests
         Assert.AreEqual(ItemId.Donut, d.Held.GetComponent<ItemBehaviour>().Id);
         // the held item rides in front of the camera
         for (int i = 0; i < 20; i++) yield return new WaitForFixedUpdate();
-        float dist = Vector3.Distance(donut.transform.position, Camera.main.transform.position);
+        float dist = Vector3.Distance(d.Held.transform.position, Camera.main.transform.position);
         Assert.Less(dist, 1.1f, "held donut stays near the camera");
         yield return Tap(Key.E);
         Assert.IsFalse(d.Holding, "E again drops it");
@@ -148,6 +148,7 @@ public sealed class DesktopModeTests
         yield return null; yield return null;
         yield return Tap(Key.E);
         Assert.IsTrue(d.Holding, "grabbed the cup");
+        cup = d.Held.GetComponent<CupFill>(); Assert.NotNull(cup, "the held thing is a cup");
         Face(d, rig, cooler.TapPoint + Vector3.up * .3f, 1.0f);
         yield return null; yield return null;
         StringAssert.Contains("tap", d.FocusLabel, Probe(d, cooler.TapPoint));

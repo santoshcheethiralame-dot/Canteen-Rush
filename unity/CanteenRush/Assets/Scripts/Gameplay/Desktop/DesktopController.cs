@@ -21,14 +21,33 @@ namespace CanteenRush.Gameplay.Desktop
 
         public const float Reach = 3f, EyeHeight = 1.65f, WalkSpeed = 2.4f, SprintSpeed = 4f, Gravity = -12f;
         public static readonly Vector3 HoldOffset = new Vector3(.22f, -.2f, .55f);
+        public static readonly Vector3 TrayHoldOffset = new Vector3(0f, -.42f, .95f);   // a tray is big: carry it low and out front
+        Vector3 HoldFor(XRBaseInteractable it) => it != null && it.GetComponent<Tray>() != null ? TrayHoldOffset : HoldOffset;
         public float Sensitivity = .12f;
         public Kind Focus { get; private set; }
         public string FocusLabel { get; private set; } = "";
         public bool Paused { get; private set; }
         public bool Ready => _ready;
-        public bool Holding => _hand != null && _hand.hasSelection;
-        public XRBaseInteractable Held => _hand != null && _hand.hasSelection ? _hand.interactablesSelected[0] as XRBaseInteractable : null;
+        public bool Holding => Held != null;
+        /// The item or tray in hand. The rig also lets the hand select scenery such as teleport floors; those do not count.
+        public XRBaseInteractable Held
+        {
+            get
+            {
+                if (_hand == null || !_hand.hasSelection) return null;
+                foreach (var it in _hand.interactablesSelected)
+                    if (it is XRBaseInteractable b && (b.GetComponent<ItemBehaviour>() != null || b.GetComponent<Tray>() != null)) return b;
+                return null;
+            }
+        }
         public XRBaseInteractable Target => _target;
+        public string DebugSelected()
+        {
+            if (_hand == null) return "-";
+            var sb = new System.Text.StringBuilder();
+            foreach (var it in _hand.interactablesSelected) sb.Append(((Component)it).name).Append(' ');
+            return sb + "| hover " + (_hand.hasHover ? ((Component)_hand.interactablesHovered[0]).name : "-") + " | target " + (_target != null ? _target.name : "-");
+        }
         public GameManager Game => _game;
 
         bool _active, _ready;
@@ -40,6 +59,9 @@ namespace CanteenRush.Gameplay.Desktop
         GameManager _game;
         GameObject _simulator;
         WaterCooler _cooler;
+        ServeSocket[] _sockets = new ServeSocket[0];
+        ServeSocket _serve;
+        Vector3? _traySlot;
         float _yaw, _pitch, _vy, _tilt;
         XRBaseInteractable _target;
         RaycastHit _aim;
@@ -74,6 +96,7 @@ namespace CanteenRush.Gameplay.Desktop
             _mgr = FindFirstObjectByType<XRInteractionManager>();
             _game = FindFirstObjectByType<GameManager>();
             _cooler = FindFirstObjectByType<WaterCooler>();
+            _sockets = FindObjectsByType<ServeSocket>(FindObjectsSortMode.None);
             var sim = FindFirstObjectByType<XRDeviceSimulator>(FindObjectsInactive.Include);
             _simulator = sim != null ? sim.gameObject : null;
             foreach (var hand in rig.GetComponentsInChildren<NearFarInteractor>(true))
@@ -145,6 +168,15 @@ namespace CanteenRush.Gameplay.Desktop
             _cam.transform.localRotation = Quaternion.Euler(_pitch, 0, 0);
         }
 
+        bool _pressQueued, _pumpQueued;
+        /// Scripted input for the demo runner and tests: same code path as a click or E.
+        public void QueuePress() { _pressQueued = true; }
+        public void QueuePump(bool on) { _pumpQueued = on; }
+        public void Teleport(Vector3 floorPosition)
+        {
+            _cc.enabled = false; _rig.position = floorPosition; _cc.enabled = true; Physics.SyncTransforms();
+        }
+
         public void SetPaused(bool paused) { Paused = paused; Time.timeScale = paused ? 0f : 1f; SetCursor(!paused); }
 
         void Look()
@@ -172,7 +204,7 @@ namespace CanteenRush.Gameplay.Desktop
             if (!_active || !_ready) return;
             // The hand rides in front of the camera; when empty it points at the crosshair target.
             var ct = _cam.transform;
-            Vector3 pos = ct.TransformPoint(HoldOffset);
+            Vector3 pos = ct.TransformPoint(HoldFor(Held));
             Vector3 aimPoint = _hasAim ? _aim.point : ct.position + ct.forward * 3f;
             Vector3 fwd = aimPoint - pos; if (fwd.sqrMagnitude < .01f || Holding) fwd = ct.forward;
             bool tilting = Holding && Mouse.current != null && Mouse.current.rightButton.isPressed;
@@ -189,14 +221,23 @@ namespace CanteenRush.Gameplay.Desktop
             var ct = _cam.transform; var held = Held;
             var hits = Physics.SphereCastAll(ct.position, .12f, ct.forward, Reach, Mask, QueryTriggerInteraction.Ignore);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-            XRBaseInteractable best = null; RaycastHit bestHit = default;
+            XRBaseInteractable best = null; RaycastHit bestHit = default; float bestScore = float.MaxValue;
             foreach (var h in hits)
             {
                 if (h.collider.transform.IsChildOf(_rig)) continue;
                 var it = h.collider.GetComponentInParent<XRBaseInteractable>();
+                if (it != null && it.isSelected && it.firstInteractorSelecting is XRSocketInteractor socketHolder)
+                {
+                    var tray = socketHolder.GetComponentInParent<Tray>();   // clicking food on a tray picks up the tray
+                    if (tray != null) it = tray.GetComponent<XRBaseInteractable>();
+                }
                 if (it != null && it == held) continue;
+                if (it != null && !Usable(it)) it = null;   // teleport floors and the like are scenery here
                 if (it == null || it.GetComponent<XRSocketInteractor>() != null) { if (!_hasAim) { _aim = h; _hasAim = true; } continue; }
-                if (best == null) { best = it; bestHit = h; }
+                // Prefer what is closest to the crosshair line, then what is nearest.
+                float perp = Vector3.Cross(ct.forward, h.collider.bounds.center - ct.position).magnitude;
+                float score = perp + h.distance * .05f;
+                if (score < bestScore) { bestScore = score; best = it; bestHit = h; }
             }
             // No wall test on purpose: the display cases are closed collision meshes around the donuts.
             if (best != null) { _target = best; _aim = bestHit; _hasAim = true; }
@@ -205,9 +246,13 @@ namespace CanteenRush.Gameplay.Desktop
 
         void Classify(XRBaseInteractable held)
         {
+            _serve = null; _traySlot = null;
             if (held != null)
             {
                 Focus = Kind.Drop; FocusLabel = "Drop " + Nice(held);
+                var overTray = _target != null ? _target.GetComponent<Tray>() : null;
+                if (overTray != null && held.GetComponent<ItemBehaviour>() != null && overTray.TryGetFreeSocket(out var slot)) { _traySlot = slot; FocusLabel = "Put " + Nice(held) + " on the tray"; return; }
+                if (held.GetComponent<Tray>() != null) { _serve = SocketInView(); if (_serve != null) { FocusLabel = "Serve the tray here"; return; } }
                 if (held.GetComponent<CupFill>() != null && AimingAtCooler()) FocusLabel = "Place cup under the tap";
                 else if (_hasAim && _aim.normal.y > .5f) FocusLabel = "Put " + Nice(held) + " here";
                 return;
@@ -222,6 +267,23 @@ namespace CanteenRush.Gameplay.Desktop
             if (_target.isSelected) return;
             Focus = Kind.Grab; FocusLabel = "Grab " + Nice(_target);
         }
+
+        ServeSocket SocketInView()
+        {
+            var ct = _cam.transform; ServeSocket best = null; float bestPerp = .6f;
+            foreach (var sock in _sockets)
+            {
+                if (sock == null) continue;
+                Vector3 to = sock.transform.position - ct.position; float along = Vector3.Dot(to, ct.forward);
+                if (along < .3f || along > Reach + 1.5f) continue;
+                float perp = (to - ct.forward * along).magnitude;
+                if (perp < bestPerp) { bestPerp = perp; best = sock; }
+            }
+            return best;
+        }
+
+        static bool Usable(XRBaseInteractable it) =>
+            it.GetComponent<ItemBehaviour>() != null || it.GetComponent<Tray>() != null || it.GetComponentInParent<FridgeDoor>() != null || it.GetComponentInParent<WaterCooler>() != null;
 
         bool AimingAtCooler()
         {
@@ -242,7 +304,7 @@ namespace CanteenRush.Gameplay.Desktop
         void Interact(Keyboard kb)
         {
             var mouse = Mouse.current;
-            bool press = (mouse != null && mouse.leftButton.wasPressedThisFrame) || kb.eKey.wasPressedThisFrame;
+            bool press = (mouse != null && mouse.leftButton.wasPressedThisFrame) || kb.eKey.wasPressedThisFrame || _pressQueued; _pressQueued = false;
             if (kb.enterKey.wasPressedThisFrame && (_game.State == RoundState.Menu || _game.State == RoundState.Results)) _game.Play();
             if (press)
             {
@@ -252,7 +314,7 @@ namespace CanteenRush.Gameplay.Desktop
             }
             if (_cooler != null)
             {
-                bool pump = kb.fKey.isPressed && (Focus == Kind.Pump || CupAtTap());
+                bool pump = (kb.fKey.isPressed || _pumpQueued) && (Focus == Kind.Pump || CupAtTap());
                 if (pump != _cooler.Pumping) _cooler.SetPump(pump);
             }
         }
@@ -272,7 +334,7 @@ namespace CanteenRush.Gameplay.Desktop
             var body = target.GetComponent<Rigidbody>();
             if (body != null)
             {
-                Vector3 hold = _cam.transform.TransformPoint(HoldOffset);
+                Vector3 hold = _cam.transform.TransformPoint(HoldFor(target));
                 bool tray = target.GetComponent<Tray>() != null;
                 if (body.isKinematic == false) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; }
                 body.position = hold; target.transform.position = hold;
@@ -281,7 +343,7 @@ namespace CanteenRush.Gameplay.Desktop
             }
             _mgr.SelectEnter((IXRSelectInteractor)_hand, (IXRSelectInteractable)target);
             _tilt = 0;
-            return _hand.hasSelection;
+            return Holding;
         }
 
         public void Drop(bool smart)
@@ -290,7 +352,9 @@ namespace CanteenRush.Gameplay.Desktop
             Vector3? place = null;
             if (smart)
             {
-                if (held.GetComponent<CupFill>() != null && AimingAtCooler()) place = _cooler.TapPoint;
+                if (_traySlot.HasValue) place = _traySlot.Value;
+                else if (_serve != null) place = _serve.transform.position;
+                else if (held.GetComponent<CupFill>() != null && AimingAtCooler()) place = _cooler.TapPoint;
                 else if (_hasAim && _aim.normal.y > .5f) place = _aim.point + Vector3.up * (HalfHeight(held) + .02f);
             }
             _mgr.SelectExit((IXRSelectInteractor)_hand, (IXRSelectInteractable)held);

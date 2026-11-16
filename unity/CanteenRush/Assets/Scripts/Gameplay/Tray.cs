@@ -18,6 +18,13 @@ namespace CanteenRush.Gameplay
         Quaternion _homeRotation;
         float _spillTimer, _returnTimer = -1;
         public bool Returning => _returnTimer >= 0;
+        /// Desktop mode: where the next item should be set down (the first socket with nothing in it).
+        public bool TryGetFreeSocket(out Vector3 position)
+        {
+            foreach (var socket in _sockets)
+                if (socket != null && !socket.hasSelection) { position = socket.attachTransform != null ? socket.attachTransform.position : socket.transform.position; return true; }
+            position = default; return false;
+        }
         public IReadOnlyList<ItemId> Contents
         {
             get

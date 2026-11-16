@@ -19,25 +19,24 @@ Roles: **Driver** holds the keyboard and mouse. **Narrator** speaks and watches 
 6. Start a screen recording of a full practice round now. It is the backup if the live demo fails (see A4).
 7. Reset: restart the app so the first thing on screen is the **menu board**.
 
-### A2. Controls cheat sheet (XR Device Simulator, keyboard and mouse)
-Tape this beside the keyboard.
+### A2. Controls cheat sheet (desktop mode, the default)
+Tape this beside the keyboard. The overlay shows the same list on screen (F1 hides it).
 
 | To do | Keys |
 |---|---|
-| Look around | hold **right mouse button** and move the mouse |
-| Walk | **W A S D** |
-| Select a hand | **Y** = right controller, **T** = left, **Tab** cycles (see the on-screen help) |
-| Grab / release | tap **G** to grab, tap **G** again to release (toggle grip) |
-| Trigger (pump, UI click) | **left mouse button** with a controller selected |
-| Start or replay | point at Play or Replay and trigger. Fallback: **Enter** |
-| Back to menu | **Menu** on the results board. Fallback: **F8** |
-| Seated / teleport | **F6** / **F7** (or the menu buttons) |
-| Haptics HUD | **F9** |
+| Walk / sprint | **W A S D** / **Shift** |
+| Look | mouse (click the window first so it captures the cursor) |
+| Grab / drop the thing under the crosshair | **left click** or **E** |
+| Put food on the tray, a cup under the tap, the tray on the customer table | aim there, **E** (it snaps into place) |
+| Open / close the fridge | **E** on the door |
+| Pump water | cup under the tap, hold **F** |
+| Tilt the tray | hold **right mouse** and move the mouse |
+| Start or replay | **Enter** |
+| Pause / menu | **Esc**, then **M** |
+| Haptics HUD | **F9** (the demo's stand-in for vibration) |
+| Show the VR Device Simulator instead | **F5** |
 
-Rules that save you on stage:
-- **Click the window first** so it has keyboard focus; otherwise keys go to the editor.
-- A grab only works when the hand's ray or sphere is on the item. Aim, then tap **G**.
-- Do not mash G: it is a toggle, two taps in a second puts the item straight back.
+Say once during the demo: "This is desktop mode over the same XR rig; F5 switches to the XR Device Simulator." Both paths fire identical audio and haptic events.
 
 ### A3. Where things are
 The player starts **behind the display cases**, between the cases and the fridge, facing the open side. Donuts are in the display cases, the fridge is beside you, the water cooler is on the prep counter, trays are on the rack. The exit to the patio is the opening **immediately right of the donut cases**. Customers sit on the patio, 9 to 18 m out. Full coordinates: `docs/LAYOUT.md`.
@@ -46,7 +45,7 @@ The player starts **behind the display cases**, between the cases and the fridge
 | Problem | Fix, and what to say |
 |---|---|
 | Keys do nothing | Click the Game window. Still nothing: Enter starts the round, F8 returns to menu. |
-| Item will not grab | Move the hand closer, aim at it, tap G. Say: "The simulator gives me one hand at a time." |
+| Item will not grab | Get within 3 m and put the crosshair on it; the prompt says "Grab ...". |
 | Dropped an item | Fine. It is the Spill haptic and sound: "That is the spill feedback." Use it as a feature. |
 | No haptics visible | Press **F9**. Say: "The simulator cannot vibrate, so the HUD shows every pulse." |
 | No sound | Check output device before the demo, not during. Fall back to narrating the cues. |

@@ -10,8 +10,8 @@ namespace CanteenRush.Gameplay.Desktop
         static readonly (string key, string what)[] Keys =
         {
             ("W A S D", "walk (Shift sprint)"), ("Mouse", "look"), ("Click / E", "grab, drop, open fridge"),
-            ("F (hold)", "pump water"), ("Right mouse + move", "tilt the tray"), ("Enter", "start / replay"),
-            ("Esc", "pause"), ("F1", "hide this"), ("F5", "VR simulator")
+            ("F (hold)", "pump water"), ("Hold R-mouse", "tilt tray (drag)"), ("Enter", "start / replay"),
+            ("Esc", "pause"), ("F1", "hide this"), ("F9", "haptics HUD"), ("F5", "VR simulator")
         };
         DesktopController _c;
         GUIStyle _label, _small, _title;
@@ -64,7 +64,7 @@ namespace CanteenRush.Gameplay.Desktop
                 Box(r, new Color(0, 0, 0, .6f)); GUI.Label(r, state == RoundState.Menu ? "Press ENTER to start" : "Press ENTER to play again   |   M (in pause) for menu", _title);
             }
             if (_guide) DrawGuide(h);
-            else GUI.Label(new Rect(14, h - 34, 300, 26), "F1: controls", _small);
+            else GUI.Label(new Rect(14, 14, 300, 26), "F1: controls", _small);
             if (_c.Paused)
             {
                 Box(new Rect(0, 0, w, h), new Color(0, 0, 0, .6f));
@@ -77,7 +77,7 @@ namespace CanteenRush.Gameplay.Desktop
         void DrawGuide(float h)
         {
             float rows = Keys.Length, height = 34 + rows * 24;
-            var r = new Rect(14, h - height - 14, 330, height);
+            var r = new Rect(14, 14, 330, height);
             Box(r, new Color(0, 0, 0, .55f));
             GUI.Label(new Rect(r.x + 12, r.y + 4, 300, 26), "CONTROLS", _small);
             for (int i = 0; i < Keys.Length; i++)
