@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc757a7595fb20a721f871139a39fb, type: 3}
+  m_Name: Cue_amb_patio_birds
+  m_EditorClassIdentifier: 
+  CueId: amb_patio_birds
+  Variants:
+  - {fileID: 8300000, guid: 4a86939e37c9cda82118cd881f365536, type: 3}
+  PitchRange: {x: 1, y: 1}
+  VolumeRange: {x: 0.6, y: 0.6}
+  MinDistance: 3
+  MaxDistance: 25
+  Loop: 1
+  Group: {fileID: 24300022, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  Spatial: 1
+  Bus: 1
+  Occludable: 1

@@ -22,8 +22,9 @@ namespace CanteenRush.Gameplay
             foreach (var caster in GetComponentsInChildren<CurveInteractionCaster>(true)) caster.raycastMask |= targets | LayerMask.GetMask("Environment");
             foreach (var ray in GetComponentsInChildren<XRRayInteractor>(true)) ray.raycastMask |= targets | LayerMask.GetMask("Environment");
         }
-        void OnEnable() { GameEvents.OnPlayerMoveSpeed += Movement; }
-        void OnDisable() { GameEvents.OnPlayerMoveSpeed -= Movement; }
+        void OnEnable() { GameEvents.OnPlayerMoveSpeed += Movement; GameEvents.OnComfortChanged += Comfort; }
+        void OnDisable() { GameEvents.OnPlayerMoveSpeed -= Movement; GameEvents.OnComfortChanged -= Comfort; }
+        void Comfort(bool seated, bool teleport) { SetSeated(seated); SetTeleport(teleport); }
         void Movement(float speed) { _target = speed > .05f ? 1 : 0; }
         void Update() { if (_vignette != null) _vignette.alpha = Mathf.MoveTowards(_vignette.alpha, _target, _fadeSpeed * Time.deltaTime); }
         public void SetSeated(bool seated) { if (_cameraOffset != null) _cameraOffset.localPosition = _standingPosition + Vector3.up * (seated ? (_config != null ? _config.SeatedOffset : _seatedOffset) : 0); }

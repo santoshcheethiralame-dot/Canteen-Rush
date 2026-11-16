@@ -23,8 +23,8 @@ namespace CanteenRush.Gameplay
         public float Remaining => _wave == null ? _config.RoundSeconds : Mathf.Max(0, _config.RoundSeconds - _wave.Elapsed);
         public bool IsPlaying => State == RoundState.Wave1 || State == RoundState.Wave2 || State == RoundState.Wave3;
         void Awake() { _sun = FindFirstObjectByType<SunCycle>(); }
-        void OnEnable() { GameEvents.OnItemGrabbed += Grabbed; GameEvents.OnItemSocketed += Socketed; GameEvents.OnOrderServed += Served; }
-        void OnDisable() { GameEvents.OnItemGrabbed -= Grabbed; GameEvents.OnItemSocketed -= Socketed; GameEvents.OnOrderServed -= Served; }
+        void OnEnable() { GameEvents.OnItemGrabbed += Grabbed; GameEvents.OnItemSocketed += Socketed; GameEvents.OnOrderServed += Served; GameEvents.OnPlayRequested += Play; GameEvents.OnMenuRequested += Menu; }
+        void OnDisable() { GameEvents.OnItemGrabbed -= Grabbed; GameEvents.OnItemSocketed -= Socketed; GameEvents.OnOrderServed -= Served; GameEvents.OnPlayRequested -= Play; GameEvents.OnMenuRequested -= Menu; }
         void Start() { if (State == RoundState.Boot) SetState(RoundState.Menu); }
         void SetState(RoundState state) { State = state; GameEvents.RoundStateChanged(state); }
         void ResetRoundObjects()

@@ -46,6 +46,11 @@ namespace CanteenRush.Core
         public static event Action OnUiHover;
         public static event Action OnUiClick;
 
+        // ---- UI shell requests (raised by P3's MenuBoard/ResultsBoard, handled by P2's GameManager/ComfortSettings) ----
+        public static event Action OnPlayRequested;                           // Play (menu) or Replay (results)
+        public static event Action OnMenuRequested;                           // back to the menu board
+        public static event Action<bool, bool> OnComfortChanged;              // seated, teleportEnabled
+
         // Raising API (one line each; null-safe)
         public static void RoundStateChanged(RoundState s) => OnRoundStateChanged?.Invoke(s);
         public static void RoundTimeChanged(float t) => OnRoundTimeChanged?.Invoke(t);
@@ -74,8 +79,11 @@ namespace CanteenRush.Core
         public static void TutorialStep(int step) => OnTutorialStep?.Invoke(step);
         public static void UiHover() => OnUiHover?.Invoke();
         public static void UiClick() => OnUiClick?.Invoke();
+        public static void PlayRequested() => OnPlayRequested?.Invoke();
+        public static void MenuRequested() => OnMenuRequested?.Invoke();
+        public static void ComfortChanged(bool seated, bool teleport) => OnComfortChanged?.Invoke(seated, teleport);
 
-        public static void ResetAll() { OnRoundStateChanged = null; OnRoundTimeChanged = null; OnScoreChanged = null; OnOrderPlaced = null; OnOrderPatience = null; OnOrderServed = null; OnOrderExpired = null; OnCustomerState = null; OnCustomerCount = null; OnItemGrabbed = null; OnItemReleased = null; OnItemSocketed = null; OnItemDropped = null; OnItemImpact = null; OnItemSpawned = null; OnFridgeDoorMoved = null; OnFridgeDoorLimit = null; OnPumpActivated = null; OnCupFilling = null; OnCupFilled = null; OnTrayTilt = null; OnTrayServedPlaced = null; OnPlayerMoveSpeed = null; OnFootstep = null; OnTutorialStep = null; OnUiHover = null; OnUiClick = null; }
+        public static void ResetAll() { OnRoundStateChanged = null; OnRoundTimeChanged = null; OnScoreChanged = null; OnOrderPlaced = null; OnOrderPatience = null; OnOrderServed = null; OnOrderExpired = null; OnCustomerState = null; OnCustomerCount = null; OnItemGrabbed = null; OnItemReleased = null; OnItemSocketed = null; OnItemDropped = null; OnItemImpact = null; OnItemSpawned = null; OnFridgeDoorMoved = null; OnFridgeDoorLimit = null; OnPumpActivated = null; OnCupFilling = null; OnCupFilled = null; OnTrayTilt = null; OnTrayServedPlaced = null; OnPlayerMoveSpeed = null; OnFootstep = null; OnTutorialStep = null; OnUiHover = null; OnUiClick = null; OnPlayRequested = null; OnMenuRequested = null; OnComfortChanged = null; }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetOnLoad() => ResetAll();
     }

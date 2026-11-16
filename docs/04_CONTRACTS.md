@@ -183,6 +183,11 @@ namespace CanteenRush.Core
         public static event Action OnUiHover;
         public static event Action OnUiClick;
 
+        // ---- UI shell requests (added 2026-11-13 by P3, additive; see DECISIONS.md) ----
+        public static event Action OnPlayRequested;                           // Play (menu) or Replay (results)
+        public static event Action OnMenuRequested;                           // Menu button on the results board
+        public static event Action<bool, bool> OnComfortChanged;              // seated, teleportEnabled
+
         // Raising API (one line each; null-safe)
         public static void RoundStateChanged(RoundState s) => OnRoundStateChanged?.Invoke(s);
         public static void RoundTimeChanged(float t) => OnRoundTimeChanged?.Invoke(t);
@@ -211,6 +216,9 @@ namespace CanteenRush.Core
         public static void TutorialStep(int step) => OnTutorialStep?.Invoke(step);
         public static void UiHover() => OnUiHover?.Invoke();
         public static void UiClick() => OnUiClick?.Invoke();
+        public static void PlayRequested() => OnPlayRequested?.Invoke();
+        public static void MenuRequested() => OnMenuRequested?.Invoke();
+        public static void ComfortChanged(bool seated, bool teleport) => OnComfortChanged?.Invoke(seated, teleport);
 
         public static void ResetAll() { /* set every event field to null; used by tests and GameManager at round start */ }
     }
@@ -231,7 +239,8 @@ namespace CanteenRush.Core
 | `TrayTilt`, `TrayServedPlaced` | `Tray`, `ServeSocket` (Gameplay) |
 | `PlayerMoveSpeed`, `Footstep` | `PlayerMotionReporter` (Gameplay) |
 | `TutorialStep` | `GameManager` (Gameplay) — advances when the player completes each step |
-| `UiHover`, `UiClick` | UI button wrappers (UI assembly, P3 — the only events P3 raises) |
+| `UiHover`, `UiClick` | UI button wrappers (`UiSoundHooks`, UI assembly, P3) |
+| `PlayRequested`, `MenuRequested`, `ComfortChanged` | `MenuBoard` / `ResultsBoard` (UI assembly, P3). Handled by `GameManager.Play/Menu` and `ComfortSettings.SetSeated/SetTeleport` (Gameplay, P2). Added 2026-11-13 so the shell never references `Cr.Gameplay`. |
 
 ---
 
@@ -293,6 +302,7 @@ public sealed class WaveDirector
 `OrderTemplate` (ScriptableObject): `ItemId[] Items; int MinWave;` (a template is eligible from wave `MinWave` onward).
 `HapticPreset` (ScriptableObject): `string Name; float Amplitude; float Duration; bool IsRamp;` — P3 owns `Assets/Data/Haptics/` (the one exception to P2's ownership of `Assets/Data`).
 `AudioCueSet` (ScriptableObject): `string CueId; AudioClip[] Variants; Vector2 PitchRange; Vector2 VolumeRange; float MinDistance; float MaxDistance; bool Loop; AudioMixerGroup Group` — P3 owns `Assets/Data/AudioCues/`.
+Additive fields as implemented (2026-11-13, P3): `HapticPreset` also has `int Pulses; float Gap` (ServeOk double pulse), `Color DebugColor` (debug HUD) and `Vector2 RampInput, RampAmplitude` (ramp mapping); it lives in `Cr.Haptics`. `AudioCueSet` also has `bool Spatial` (2D cues), `AudioBus Bus` (mixer group fallback) and `bool Occludable`; it lives in `Cr.Audio`.
 
 ---
 

@@ -1,0 +1,1 @@
+{"name":"Cr.Haptics","rootNamespace":"CanteenRush.Haptics","references":["Cr.Core","Unity.XR.Interaction.Toolkit","Unity.InputSystem"]}

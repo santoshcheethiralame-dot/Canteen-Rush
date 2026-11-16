@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc757a7595fb20a721f871139a39fb, type: 3}
+  m_Name: Cue_fridge_latch
+  m_EditorClassIdentifier: 
+  CueId: fridge_latch
+  Variants:
+  - {fileID: 8300000, guid: 1312c3eb62c1775fb8bb535499047745, type: 3}
+  - {fileID: 8300000, guid: 526e37bfc64f0513a50749934ca7ca7e, type: 3}
+  PitchRange: {x: 0.97, y: 1.03}
+  VolumeRange: {x: 0.9, y: 1}
+  MinDistance: 1
+  MaxDistance: 8
+  Loop: 0
+  Group: {fileID: 24300012, guid: 7be900673bbc28fa9ed11f57f73536ac, type: 2}
+  Spatial: 1
+  Bus: 0
+  Occludable: 0
