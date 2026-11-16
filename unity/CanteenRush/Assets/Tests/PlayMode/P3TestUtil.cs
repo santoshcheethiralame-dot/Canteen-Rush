@@ -6,6 +6,7 @@ using CanteenRush.Core;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
 namespace CanteenRush.Tests.PlayMode
 {
     public static class P3TestUtil
@@ -13,11 +14,9 @@ namespace CanteenRush.Tests.PlayMode
         public const string SandboxScene = "Assets/Scenes/Sandbox_P3.unity";
         public const string MainScene = "Assets/Scenes/Main.unity";
 
-        public static IEnumerator Load(string path, int frames = 5)
-        {
-            EditorSceneManager.LoadSceneInPlayMode(path, new LoadSceneParameters(LoadSceneMode.Single));
-            for (int i = 0; i < frames; i++) yield return null;
-        }
+        public static void Open(string path) { EditorSceneManager.OpenScene(path); }
+
+        public static IEnumerator Frames(int frames = 5) { for (int i = 0; i < frames; i++) yield return null; }
 
         /// Subscriber count of every GameEvents event, read from the compiler-generated backing fields.
         public static Dictionary<string, int> SubscriberCounts()
