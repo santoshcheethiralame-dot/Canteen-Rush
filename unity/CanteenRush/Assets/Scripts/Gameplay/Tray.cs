@@ -19,11 +19,11 @@ namespace CanteenRush.Gameplay
         float _spillTimer, _returnTimer = -1;
         public bool Returning => _returnTimer >= 0;
         /// Desktop mode: where the next item should be set down (the first socket with nothing in it).
-        public bool TryGetFreeSocket(out Vector3 position)
+        public bool TryGetFreeSocket(out XRSocketInteractor free)
         {
             foreach (var socket in _sockets)
-                if (socket != null && !socket.hasSelection) { position = socket.attachTransform != null ? socket.attachTransform.position : socket.transform.position; return true; }
-            position = default; return false;
+                if (socket != null && !socket.hasSelection) { free = socket; return true; }
+            free = null; return false;
         }
         public IReadOnlyList<ItemId> Contents
         {

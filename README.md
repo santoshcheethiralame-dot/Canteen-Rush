@@ -29,6 +29,7 @@ Output: `Builds/CanteenRush/CanteenRush.exe` (git-ignored, about 107 MB).
 | Walk / sprint | W A S D / Shift |
 | Look | mouse |
 | Grab or drop what the crosshair is on | left click or **E** (drop "smart-places" on the tray, under the tap, or on the customer table) |
+| Serve | carry the tray, put the crosshair on the customer, click or **E** |
 | Open / close the fridge | click or **E** on the door |
 | Pump water | set a cup under the tap, hold **F** |
 | Tilt the tray | hold right mouse while carrying, then move the mouse |

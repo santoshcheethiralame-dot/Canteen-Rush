@@ -11,6 +11,7 @@ namespace CanteenRush.Gameplay
         readonly List<Order> _snapshot = new List<Order>(8);
         int _nextId;
         public int LastCompletedSeat { get; private set; } = -1;
+        public IReadOnlyCollection<Order> Active => _orders.Values;
         float _reportClock;
         public void ResetOrders() { _orders.Clear(); _nextId = 0; _reportClock = 0; LastCompletedSeat = -1; }
         public Order Place(int seat, Vector3 position, OrderTemplate template)

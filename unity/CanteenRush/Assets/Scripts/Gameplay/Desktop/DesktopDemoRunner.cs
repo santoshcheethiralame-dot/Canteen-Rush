@@ -21,12 +21,15 @@ namespace CanteenRush.Gameplay.Desktop
 
         IEnumerator Start()
         {
-            Directory.CreateDirectory(_dir);
+            Directory.CreateDirectory(_dir); Application.runInBackground = true;
             for (int i = 0; i < 600 && (_d = FindFirstObjectByType<DesktopController>()) == null; i++) yield return null;
             for (int i = 0; i < 600 && !_d.Ready; i++) yield return null;
             _d.EnableForTests();
             _rig = FindFirstObjectByType<ComfortSettings>().transform;
             Log("resolution " + Screen.width + "x" + Screen.height);
+            foreach (var r in FindObjectsByType<Renderer>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+                foreach (var m in r.sharedMaterials)
+                    if (m == null || m.shader == null || !m.shader.isSupported || m.shader.name.Contains("Error")) Log("BROKEN material on " + PathOf(r.transform) + " : " + (m == null ? "null" : m.name + " / " + (m.shader != null ? m.shader.name : "no shader")));
             yield return Wait(1.5f); yield return Shot("01_start_menu");
             _d.Game.Play(); yield return Wait(1f); yield return Shot("02_tutorial_started");
 
@@ -52,7 +55,11 @@ namespace CanteenRush.Gameplay.Desktop
             Log("holding tray: " + _d.Holding + " sel " + _d.DebugSelected() + " focus " + _d.Focus + " " + _d.FocusLabel);
 
             var socket = FindFirstObjectByType<ServeSocket>();
-            Face(socket.transform.position + Vector3.up * .3f, 1.4f, socket.transform.position + Vector3.right * 3); yield return Wait(.8f);
+            Customer guest = null;
+            foreach (var c in FindObjectsByType<Customer>(FindObjectsSortMode.None)) if (c.State == CustomerState.Waiting) guest = c;
+            if (guest != null) { Face(guest.transform.position + Vector3.up * 1.1f, 1.7f, guest.transform.position + (Camera.main.transform.position - guest.transform.position).normalized * 3); }
+            else Face(socket.transform.position + Vector3.up * .3f, 1.4f, socket.transform.position + Vector3.right * 3);
+            yield return Wait(.8f);
             yield return Shot("08_at_customer_table"); Log("focus " + _d.Focus + " '" + _d.FocusLabel + "'");
             yield return Press(); yield return Wait(2f); yield return Shot("09_after_serve");
             Log("state after serve: " + _d.Game.State);
@@ -72,6 +79,7 @@ namespace CanteenRush.Gameplay.Desktop
 #endif
         }
 
+        static string PathOf(Transform t) { var s = t.name; while (t.parent != null) { t = t.parent; s = t.name + "/" + s; } return s; }
         void Log(string m) { File.AppendAllText(Path.Combine(_dir, "log.txt"), m + "\n"); }
         static IEnumerator Wait(float s) { float t = 0; while (t < s) { t += Time.unscaledDeltaTime; yield return null; } }
         IEnumerator Press() { _d.QueuePress(); yield return null; yield return null; }

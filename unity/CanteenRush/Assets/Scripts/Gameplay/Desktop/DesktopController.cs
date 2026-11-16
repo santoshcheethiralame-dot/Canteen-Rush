@@ -61,7 +61,11 @@ namespace CanteenRush.Gameplay.Desktop
         WaterCooler _cooler;
         ServeSocket[] _sockets = new ServeSocket[0];
         ServeSocket _serve;
-        Vector3? _traySlot;
+        Customer _customer;
+        XRBaseInteractable.MovementType _heldMovement = XRBaseInteractable.MovementType.VelocityTracking;
+        OrderService _orders;
+        public Customer LookedAtCustomer => _customer;
+        XRSocketInteractor _traySlot;
         float _yaw, _pitch, _vy, _tilt;
         XRBaseInteractable _target;
         RaycastHit _aim;
@@ -87,6 +91,8 @@ namespace CanteenRush.Gameplay.Desktop
                 yield return null;
             }
             if (_ready && !Application.isBatchMode) Enable(true);
+            for (int i = 0; i < 90; i++) yield return null;
+            if (_active) HideHapticsHud();   // it may have built itself after we switched on
         }
 
         void Bind(Transform rig)
@@ -97,6 +103,7 @@ namespace CanteenRush.Gameplay.Desktop
             _game = FindFirstObjectByType<GameManager>();
             _cooler = FindFirstObjectByType<WaterCooler>();
             _sockets = FindObjectsByType<ServeSocket>(FindObjectsSortMode.None);
+            _orders = FindFirstObjectByType<OrderService>();
             var sim = FindFirstObjectByType<XRDeviceSimulator>(FindObjectsInactive.Include);
             _simulator = sim != null ? sim.gameObject : null;
             foreach (var hand in rig.GetComponentsInChildren<NearFarInteractor>(true))
@@ -119,6 +126,9 @@ namespace CanteenRush.Gameplay.Desktop
             foreach (var b in _rig.GetComponentsInChildren<Behaviour>(true))
                 if (b != null && b.GetType().Name == "TrackedPoseDriver") b.enabled = !on;
             if (_simulator != null) _simulator.SetActive(!on);
+            SetVrParts(!on);
+            var look = GetComponent<DesktopLook>() ?? gameObject.AddComponent<DesktopLook>();
+            look.Apply(_cam, on);
             if (on)
             {
                 _yaw = _rig.eulerAngles.y; _pitch = 0; _tilt = 0; Paused = false; Time.timeScale = 1f;
@@ -127,12 +137,55 @@ namespace CanteenRush.Gameplay.Desktop
             else { Drop(false); Time.timeScale = 1f; SetCursor(false); }
         }
 
+        // XR-only parts that fight desktop control: XRI locomotion (body transformer, gravity, grab-move) moves the same
+        // CharacterController, the modality manager switches controllers off when none are tracked, the left
+        // controller (wrist HUD, teleport ray) and controller models would float in view, the comfort vignette darkens
+        // the screen whenever the player walks.
+        readonly System.Collections.Generic.List<(GameObject go, bool was)> _vrObjects = new System.Collections.Generic.List<(GameObject, bool)>();
+        readonly System.Collections.Generic.List<(Behaviour b, bool was)> _vrBehaviours = new System.Collections.Generic.List<(Behaviour, bool)>();
+        void SetVrParts(bool vr)
+        {
+            if (!vr)
+            {
+                _vrObjects.Clear(); _vrBehaviours.Clear();
+                foreach (var name in new[] { "Locomotion", "Left Controller", "Gaze Interactor", "Right Controller Visual", "Teleport Interactor", "Poke Interactor", "ComfortVignette" })
+                    foreach (var t in _rig.GetComponentsInChildren<Transform>(true))
+                        if (t.name == name && (name != "Poke Interactor" && name != "Teleport Interactor" || t.IsChildOf(_handRoot)))
+                        { _vrObjects.Add((t.gameObject, t.gameObject.activeSelf)); t.gameObject.SetActive(false); }
+                foreach (var b in _rig.GetComponentsInChildren<Behaviour>(true))
+                    if (b != null && (b.GetType().Name == "XRInputModalityManager" || b.GetType().Name == "XRGazeAssistance"))
+                    { _vrBehaviours.Add((b, b.enabled)); b.enabled = false; }
+                _handRoot.gameObject.SetActive(true); _hand.gameObject.SetActive(true);
+                var line = _hand.transform.Find("LineVisual"); if (line != null) { _vrObjects.Add((line.gameObject, line.gameObject.activeSelf)); line.gameObject.SetActive(false); }
+                HideHapticsHud();
+            }
+            else
+            {
+                foreach (var (go, was) in _vrObjects) if (go != null) go.SetActive(was);
+                foreach (var (b, was) in _vrBehaviours) if (b != null) b.enabled = was;
+                foreach (var c in _vrCanvases) if (c != null) c.enabled = true;
+                _vrObjects.Clear(); _vrBehaviours.Clear();
+            }
+        }
+
+        // Cr.Gameplay may not reference Cr.Haptics, so the debug HUD (F9) is switched off by name.
+        static void HideHapticsHud()
+        {
+            foreach (var mb in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+                if (mb.GetType().Name == "HapticsDebugHud")
+                {
+                    var visible = mb.GetType().GetProperty("Visible");
+                    if (visible != null) visible.SetValue(mb, false);
+                }
+        }
+
         void PlaceCamera()
         {
             var offset = _cam.transform.parent;
             float y = offset.InverseTransformPoint(new Vector3(offset.position.x, _rig.position.y + EyeHeight, offset.position.z)).y;
             _cam.transform.localPosition = new Vector3(0, y, 0);
             _cc.height = 1.7f; _cc.center = new Vector3(0, .85f + _cc.skinWidth, 0); _cc.radius = Mathf.Min(_cc.radius, .3f);
+            _cc.stepOffset = .42f; _cc.slopeLimit = 50f;   // the front platform is a 31 cm step
         }
 
         void SetCursor(bool locked)
@@ -199,9 +252,25 @@ namespace CanteenRush.Gameplay.Desktop
             _cc.Move((dir * speed + Vector3.up * _vy) * Time.deltaTime);
         }
 
+        static readonly string[] VrBoards = { "MenuBoard", "ResultsBoard", "WristHud" };
+        readonly System.Collections.Generic.List<Canvas> _vrCanvases = new System.Collections.Generic.List<Canvas>();
+        float _boardScan;
+        // The world-space menu, results and wrist boards are the VR UI; desktop mode draws its own screen UI instead.
+        void HideVrBoards()
+        {
+            if (Time.unscaledTime > _boardScan)
+            {
+                _boardScan = Time.unscaledTime + 1f; _vrCanvases.Clear();
+                foreach (var mb in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+                    if (System.Array.IndexOf(VrBoards, mb.GetType().Name) >= 0) _vrCanvases.AddRange(mb.GetComponentsInChildren<Canvas>(true));
+            }
+            foreach (var c in _vrCanvases) if (c != null && c.enabled) c.enabled = false;
+        }
+
         void LateUpdate()
         {
             if (!_active || !_ready) return;
+            HideVrBoards();
             // The hand rides in front of the camera; when empty it points at the crosshair target.
             var ct = _cam.transform;
             Vector3 pos = ct.TransformPoint(HoldFor(Held));
@@ -217,7 +286,7 @@ namespace CanteenRush.Gameplay.Desktop
 
         void Aim()
         {
-            _target = null; Focus = Kind.None; FocusLabel = ""; _hasAim = false;
+            _target = null; _customer = null; Focus = Kind.None; FocusLabel = ""; _hasAim = false;
             var ct = _cam.transform; var held = Held;
             var hits = Physics.SphereCastAll(ct.position, .12f, ct.forward, Reach, Mask, QueryTriggerInteraction.Ignore);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
@@ -225,6 +294,8 @@ namespace CanteenRush.Gameplay.Desktop
             foreach (var h in hits)
             {
                 if (h.collider.transform.IsChildOf(_rig)) continue;
+                var who = h.collider.GetComponentInParent<Customer>();
+                if (who != null) { if (_customer == null && h.distance < Reach + 2f) _customer = who; continue; }
                 var it = h.collider.GetComponentInParent<XRBaseInteractable>();
                 if (it != null && it.isSelected && it.firstInteractorSelecting is XRSocketInteractor socketHolder)
                 {
@@ -241,6 +312,7 @@ namespace CanteenRush.Gameplay.Desktop
             }
             // No wall test on purpose: the display cases are closed collision meshes around the donuts.
             if (best != null) { _target = best; _aim = bestHit; _hasAim = true; }
+            if (_customer == null) _customer = CustomerInView();
             Classify(held);
         }
 
@@ -252,9 +324,18 @@ namespace CanteenRush.Gameplay.Desktop
                 Focus = Kind.Drop; FocusLabel = "Drop " + Nice(held);
                 var overTray = _target != null ? _target.GetComponent<Tray>() : null;
                 if (overTray != null && held.GetComponent<ItemBehaviour>() != null && overTray.TryGetFreeSocket(out var slot)) { _traySlot = slot; FocusLabel = "Put " + Nice(held) + " on the tray"; return; }
-                if (held.GetComponent<Tray>() != null) { _serve = SocketInView(); if (_serve != null) { FocusLabel = "Serve the tray here"; return; } }
+                if (held.GetComponent<Tray>() != null)
+                {
+                    _serve = _customer != null ? SocketForSeat(_customer.SeatIndex) : SocketInView();
+                    if (_serve != null) { FocusLabel = _customer != null ? "Serve " + OrderText(_customer.SeatIndex, "this customer") : "Serve the tray here"; return; }
+                }
                 if (held.GetComponent<CupFill>() != null && AimingAtCooler()) FocusLabel = "Place cup under the tap";
                 else if (_hasAim && _aim.normal.y > .5f) FocusLabel = "Put " + Nice(held) + " here";
+                return;
+            }
+            if (_target == null && _customer != null)
+            {
+                FocusLabel = _orders != null && _orders.HasOrder(_customer.SeatIndex) ? "Wants " + OrderText(_customer.SeatIndex, "") + "  (bring a tray, click them)" : "";
                 return;
             }
             if (_target == null)
@@ -268,6 +349,41 @@ namespace CanteenRush.Gameplay.Desktop
             Focus = Kind.Grab; FocusLabel = "Grab " + Nice(_target);
         }
 
+        Customer[] _guests = new Customer[0]; float _guestScan;
+        // Customers have no collider, so pick the one whose body is nearest the crosshair line.
+        Customer CustomerInView()
+        {
+            if (Time.unscaledTime > _guestScan) { _guests = FindObjectsByType<Customer>(FindObjectsSortMode.None); _guestScan = Time.unscaledTime + .5f; }
+            var ct = _cam.transform; Customer best = null; float bestPerp = .5f;
+            foreach (var g in _guests)
+            {
+                if (g == null || !g.isActiveAndEnabled) continue;
+                for (float up = .5f; up <= 1.5f; up += .5f)
+                {
+                    Vector3 to = g.transform.position + Vector3.up * up - ct.position; float along = Vector3.Dot(to, ct.forward);
+                    if (along < .3f || along > Reach + 3f) continue;
+                    float perp = (to - ct.forward * along).magnitude;
+                    if (perp < bestPerp) { bestPerp = perp; best = g; }
+                }
+            }
+            return best;
+        }
+
+        ServeSocket SocketForSeat(int seat)
+        {
+            foreach (var sock in _sockets) if (sock != null && sock.SeatIndex == seat) return sock;
+            return null;
+        }
+
+        public string OrderText(int seat, string fallback)
+        {
+            var order = _orders != null ? _orders.GetOrder(seat) : null;
+            if (order == null || order.Items == null) return fallback;
+            var names = new string[order.Items.Length];
+            for (int i = 0; i < names.Length; i++) names[i] = order.Items[i].ToString().ToLowerInvariant();
+            return string.Join(" + ", names);
+        }
+
         ServeSocket SocketInView()
         {
             var ct = _cam.transform; ServeSocket best = null; float bestPerp = .6f;
@@ -277,6 +393,7 @@ namespace CanteenRush.Gameplay.Desktop
                 Vector3 to = sock.transform.position - ct.position; float along = Vector3.Dot(to, ct.forward);
                 if (along < .3f || along > Reach + 1.5f) continue;
                 float perp = (to - ct.forward * along).magnitude;
+                if (_orders != null && _orders.HasOrder(sock.SeatIndex)) perp -= .25f;   // a table that is waiting wins ties
                 if (perp < bestPerp) { bestPerp = perp; best = sock; }
             }
             return best;
@@ -342,6 +459,9 @@ namespace CanteenRush.Gameplay.Desktop
                 Physics.SyncTransforms();
             }
             _mgr.SelectEnter((IXRSelectInteractor)_hand, (IXRSelectInteractable)target);
+            IgnorePlayer(target, true);   // a held tray or cup must never shove the player's capsule
+            // Follow the hand exactly: velocity tracking lags and wobbles when the "hand" is a camera on a mouse.
+            if (target is XRGrabInteractable g) { _heldMovement = g.movementType; g.movementType = XRBaseInteractable.MovementType.Instantaneous; }
             _tilt = 0;
             return Holding;
         }
@@ -352,17 +472,37 @@ namespace CanteenRush.Gameplay.Desktop
             Vector3? place = null;
             if (smart)
             {
-                if (_traySlot.HasValue) place = _traySlot.Value;
+                if (_traySlot != null) place = _traySlot.attachTransform != null ? _traySlot.attachTransform.position : _traySlot.transform.position;
                 else if (_serve != null) place = _serve.transform.position;
                 else if (held.GetComponent<CupFill>() != null && AimingAtCooler()) place = _cooler.TapPoint;
                 else if (_hasAim && _aim.normal.y > .5f) place = _aim.point + Vector3.up * (HalfHeight(held) + .02f);
             }
             _mgr.SelectExit((IXRSelectInteractor)_hand, (IXRSelectInteractable)held);
+            IgnorePlayer(held, false);
+            if (held is XRGrabInteractable g) g.movementType = _heldMovement;
             _tilt = 0;
             if (!place.HasValue) return;
             var body = held.GetComponent<Rigidbody>();
             if (body != null) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; body.position = place.Value; }
             held.transform.position = place.Value;
+            // Snap straight into the slot so the item never lands on the tray and shoves it off the rack.
+            if (_traySlot != null && !_traySlot.hasSelection) { Physics.SyncTransforms(); _mgr.SelectEnter((IXRSelectInteractor)_traySlot, (IXRSelectInteractable)held); }
+            if (_serve != null && held.GetComponent<Tray>() != null)
+            {
+                var socket = _serve.GetComponent<XRSocketInteractor>();
+                Physics.SyncTransforms();
+                if (socket != null && !socket.hasSelection) _mgr.SelectEnter((IXRSelectInteractor)socket, (IXRSelectInteractable)held);
+            }
+        }
+
+        void IgnorePlayer(XRBaseInteractable it, bool ignore)
+        {
+            if (it == null || _cc == null) return;
+            foreach (var c in it.GetComponentsInChildren<Collider>(true)) if (c != null) Physics.IgnoreCollision(c, _cc, ignore);
+            // food riding in the tray's sockets comes along
+            foreach (var socket in it.GetComponentsInChildren<XRSocketInteractor>(true))
+                foreach (var food in socket.interactablesSelected)
+                    foreach (var c in ((Component)food).GetComponentsInChildren<Collider>(true)) if (c != null) Physics.IgnoreCollision(c, _cc, ignore);
         }
 
         static float HalfHeight(XRBaseInteractable it)

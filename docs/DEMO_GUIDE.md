@@ -28,6 +28,7 @@ Tape this beside the keyboard. The overlay shows the same list on screen (F1 hid
 | Look | mouse (click the window first so it captures the cursor) |
 | Grab / drop the thing under the crosshair | **left click** or **E** |
 | Put food on the tray, a cup under the tap, the tray on the customer table | aim there, **E** (it snaps into place) |
+| Serve | carry the tray, look at the customer, **E** |
 | Open / close the fridge | **E** on the door |
 | Pump water | cup under the tap, hold **F** |
 | Tilt the tray | hold **right mouse** and move the mouse |
