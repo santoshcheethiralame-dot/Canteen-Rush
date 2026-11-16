@@ -9,6 +9,7 @@ namespace CanteenRush.Gameplay
         [SerializeField] GameObject _waterVisual;
         ItemBehaviour _item;
         float _level;
+        public float Level => _level;
         void Awake() { _item = GetComponent<ItemBehaviour>(); }
         void OnEnable() { _level = 0; _item.SetItemId(ItemId.None); if (_waterVisual != null) _waterVisual.SetActive(false); }
         public void Fill(float dt)

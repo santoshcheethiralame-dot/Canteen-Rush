@@ -70,9 +70,48 @@ namespace CanteenRush.Gameplay
             if (_protectedGrabs != null) foreach (var grab in _protectedGrabs) if (grab != null) grab.enabled = IsOpen;
             if (_protectedBodies != null) foreach (var body in _protectedBodies) if (body != null) body.isKinematic = !IsOpen;
         }
+        void Start() { Invoke(nameof(IgnoreStaticOverlaps), .1f); }
+        /// The closed door's collision box overlaps the fridge body and the other door, which locks the hinge
+        /// (found by the desktop-mode tests). Ignore collisions with anything it already overlaps when closed.
+        void IgnoreStaticOverlaps()
+        {
+            var box = GetComponent<BoxCollider>(); if (box == null) return;
+            foreach (var other in Physics.OverlapBox(box.bounds.center, box.bounds.extents, transform.rotation, ~0, QueryTriggerInteraction.Ignore))
+            {
+                if (other == box || other.transform.IsChildOf(transform)) continue;
+                var body = other.attachedRigidbody;
+                if (body == null || body.isKinematic || other.GetComponentInParent<FridgeDoor>() != null) Physics.IgnoreCollision(box, other, true);
+            }
+        }
+        float _swingUntil, _swingDir;
+        const float SwingDegPerSecond = 150f;
+        /// Desktop mode: swing the door open or shut. The body goes kinematic for the swing and is turned about
+        /// its hinge by hand, then handed back to physics, so no collider or joint quirk can stall it.
+        public void Toggle()
+        {
+            if (_hinge == null) Awake();
+            _swingDir = IsOpen ? -1f : 1f;      // +1 opens, -1 closes
+            _swingUntil = Time.time + 1.6f;
+        }
+        void FixedUpdate()
+        {
+            if (_swingUntil <= 0) return;
+            float angle = Mathf.Abs(_hinge.angle), stop = (_config != null ? _config.FridgeStopDeg : 100f) - 3f;
+            bool done = Time.time >= _swingUntil || (_swingDir > 0 && angle >= stop) || (_swingDir < 0 && angle <= 1.5f);
+            if (done) { _swingUntil = 0; _body.isKinematic = false; _body.linearVelocity = Vector3.zero; _body.angularVelocity = Vector3.zero; return; }
+            _body.isKinematic = true;
+            float openSign = Mathf.Abs(_hinge.limits.max) >= Mathf.Abs(_hinge.limits.min) ? 1f : -1f;
+            // Rotating about +axis raises the hinge angle (checked by DesktopModeTests: the door must stay open afterwards).
+            Vector3 axis = transform.TransformDirection(_hinge.axis).normalized;
+            var turn = Quaternion.AngleAxis(openSign * _swingDir * SwingDegPerSecond * Time.fixedDeltaTime, axis);
+            Vector3 pivot = transform.TransformPoint(_hinge.anchor);
+            _body.MovePosition(pivot + turn * (_body.position - pivot));
+            _body.MoveRotation(turn * _body.rotation);
+        }
         public void ResetDoor()
         {
             if (_hinge == null) Awake();
+            _swingUntil = 0; _body.isKinematic = false;
             var grab = GetComponent<XRGrabInteractable>();
             if (grab != null && grab.interactionManager != null) grab.interactionManager.CancelInteractableSelection((IXRSelectInteractable)grab);
             _body.linearVelocity = Vector3.zero; _body.angularVelocity = Vector3.zero;
