@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Simulation;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 #if UNITY_EDITOR
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
@@ -15,6 +16,15 @@ namespace CanteenRush.Gameplay
             // The optional sample help overlay indexes physical keyboard controls; batch workers have none.
             if (Application.isBatchMode) GetComponent<XRDeviceSimulator>().deviceSimulatorUI = null;
         }
+
+        void Start()
+        {
+            // The simulator starts after the rig is installed. Use XRI's toggle selection
+            // for its hands while leaving the rig prefab's physical grip behavior intact.
+            foreach (var hand in FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+                hand.selectActionTrigger = XRBaseInputInteractor.InputTriggerType.Toggle;
+        }
+
 #if UNITY_EDITOR
         Keyboard _editorKeyboard;
         readonly List<Key> _pressed = new List<Key>(16);

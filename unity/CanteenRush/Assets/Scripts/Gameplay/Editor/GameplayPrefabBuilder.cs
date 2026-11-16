@@ -81,9 +81,14 @@ namespace CanteenRush.Gameplay.Editor
         {
             var root = new GameObject("Prop_Tray"); root.layer = LayerMask.NameToLayer("Tray"); root.tag = "Tray";
             ArtVisual(root, "Assets/Art/Props/Prop_Tray.fbx", PrimitiveType.Cube, new Vector3(.45f, .03f, .3f));
-            root.AddComponent<BoxCollider>().size = new Vector3(.45f, .03f, .3f);
+            var gripSurface = root.AddComponent<BoxCollider>();
+            gripSurface.size = new Vector3(.45f, .06f, .3f);
+            gripSurface.center = Vector3.up * .015f;
             var body = root.AddComponent<Rigidbody>(); body.mass = .4f; body.interpolation = RigidbodyInterpolation.Interpolate;
             var grab = root.AddComponent<XRGrabInteractable>(); grab.interactionLayers = 5;
+            grab.colliders.Add(gripSurface);
+            grab.useDynamicAttach = true;
+            grab.throwOnDetach = false;
             var tray = root.AddComponent<Tray>(); Reference(tray, "_config", Config);
             var serialized = new SerializedObject(tray); var slots = serialized.FindProperty("_sockets"); slots.arraySize = 4;
             for (int i = 0; i < 4; i++)
@@ -161,6 +166,7 @@ namespace CanteenRush.Gameplay.Editor
             var manager = root.AddComponent<GameManager>(); Reference(manager, "_config", Config); Reference(manager, "_score", score);
             Reference(manager, "_orders", orders); Reference(manager, "_customers", customers);
             var installer = root.AddComponent<WorldGameplayInstaller>(); Reference(installer, "_config", Config);
+            Reference(installer, "_canteenModel", AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Environment/Env_Canteen.fbx"));
             foreach (var pair in new[] {
                 new[] { "_rig", "Assets/Prefabs/Systems/Rig.prefab" },
                 new[] { "_simulator", Folder + "/DeviceSimulator.prefab" },
@@ -247,7 +253,18 @@ namespace CanteenRush.Gameplay.Editor
         static void RackPrefab()
         {
             var root = new GameObject("Station_TrayRack");
-            ArtVisual(root, "Assets/Art/Props/Prop_TrayRack.fbx", PrimitiveType.Cube, new Vector3(1.1f, .75f, .5f));
+            var rackModel = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Art/Props/Prop_TrayRack.fbx");
+            if (rackModel != null)
+            {
+                var visual = ArtVisual(root, "Assets/Art/Props/Prop_TrayRack.fbx", PrimitiveType.Cube, Vector3.one);
+                // The source model is base-pivoted and built as a small tabletop rack.
+                visual.transform.localScale = new Vector3(1.1f / .54f, .75f / .22f, .5f / .38f);
+            }
+            else
+            {
+                var visual = Visual(root, PrimitiveType.Cube, new Vector3(1.1f, .75f, .5f));
+                visual.transform.localPosition = Vector3.up * .375f;
+            }
             root.layer = LayerMask.NameToLayer("Stations");
             var support = root.AddComponent<BoxCollider>(); support.size = new Vector3(1.1f, .75f, .5f); support.center = Vector3.up * .375f;
             var rack = root.AddComponent<TrayRack>(); Reference(rack, "_trayPrefab", AssetDatabase.LoadAssetAtPath<GameObject>(Folder + "/Prop_Tray.prefab").GetComponent<Tray>());

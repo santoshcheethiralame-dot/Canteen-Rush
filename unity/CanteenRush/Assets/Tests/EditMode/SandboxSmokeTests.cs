@@ -14,6 +14,48 @@ public sealed class SandboxSmokeTests
 {
     static int _fillCount;
     static void CountFill(Vector3 position) { _fillCount++; }
+
+    [UnityTest] public IEnumerator MainFrontEntranceSupportsWalkingOutAndBackIn()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/Main.unity");
+        yield return new EnterPlayMode();
+        yield return null; yield return null;
+
+        var rig = Object.FindFirstObjectByType<ComfortSettings>();
+        var controller = rig.GetComponentInChildren<CharacterController>();
+        Assert.NotNull(controller);
+        Assert.IsTrue(controller.enabled);
+        var facing = GameObject.Find("PlayerStart").transform;
+        Vector3 start = controller.transform.position;
+        Vector3 inside = start + facing.right * 1.9f;
+        Vector3 outside = inside + facing.forward * 4.6f;
+        int obstacles = LayerMask.GetMask("Environment", "Stations", "Items", "Tray");
+
+        // Verify room for the player and a tray throughout the passage, including the threshold.
+        for (int i = 0; i <= 24; i++)
+        {
+            var point = Vector3.Lerp(inside, outside, i / 24f);
+            var blocking = Physics.OverlapCapsule(point + Vector3.up * .37f, point + Vector3.up * 1.52f,
+                .27f, obstacles, QueryTriggerInteraction.Ignore);
+            Assert.IsEmpty(blocking, "Blocked front route at " + point);
+            Assert.IsTrue(Physics.Raycast(point + Vector3.up * .45f, Vector3.down, .65f,
+                LayerMask.GetMask("Environment"), QueryTriggerInteraction.Ignore), "Missing floor at " + point);
+        }
+
+        WalkTo(controller, inside);
+        WalkTo(controller, outside);
+        WalkTo(controller, inside);
+        WalkTo(controller, start);
+    }
+
+    static void WalkTo(CharacterController controller, Vector3 destination)
+    {
+        for (int i = 0; i < 60 && Vector3.Distance(controller.transform.position, destination) > .04f; i++)
+            controller.Move(Vector3.ClampMagnitude(destination - controller.transform.position, .1f));
+        Assert.Less(Vector3.Distance(controller.transform.position, destination), .05f,
+            "The rig's character controller could not reach " + destination);
+    }
+
     [UnityTearDown] public IEnumerator Cleanup()
     {
         Time.timeScale = 1;

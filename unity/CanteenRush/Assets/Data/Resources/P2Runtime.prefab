@@ -134,6 +134,7 @@ MonoBehaviour:
   _cupDispenser: {fileID: 3373981003765171043, guid: b386ab0409bdd1e489f9a460003c7e12, type: 3}
   _spawner: {fileID: 7448391437288336853, guid: 8dfd9db5a6447e740854dd1540fc1a52, type: 3}
   _serveSocket: {fileID: 3831106261568393813, guid: 581dc297cbcadeb439b2a7a4eb7c9dc0, type: 3}
+  _canteenModel: {fileID: 919132149155446097, guid: a37f7c164f4f64041bad1fbf513ca159, type: 3}
   _doorPrefabs:
   - {fileID: 2598883559068246464, guid: 99b0c4e06f6926d498baac09a3a4eb6b, type: 3}
   - {fileID: 5458606233789693100, guid: ffefbf04b9145934eb70096541f8bc00, type: 3}

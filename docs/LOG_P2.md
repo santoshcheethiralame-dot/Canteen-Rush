@@ -74,3 +74,21 @@ Remaining validation outside the automated checks:
 - Also ran an instrumented live Main-scene check, without moving the food: the hand's actual target and first ray collider were Item_Donut, keyboard grip selected it, and release released it. Logs and a capture are p2-live-grab.txt and p2-live-grab.png. LiveGrabDiagnostics provides explicit editor-menu actions for this check and restores its temporary input settings and tracking changes afterward; it does not run during normal play.
 - Final bridge regression suite: **40/40 passed**, p2-input-bridge-suite.xml/log in the parent Project folder. An intermittent XRI attach-transform assertion at test teardown was resolved by resetting to Menu and letting two player frames finish before exiting Play mode.
 - The XRI Project Validation window still reports the pre-existing pinned-package/teleport-layer/background configuration warnings. No package upgrades or P1 settings edits were performed. Close that floating editor window to use the Game view. Code recompilation during a live round requires a fresh Play session; tests and source edits were completed before the final live restart.
+
+## 2026-11-11 — toggle grip for keyboard play
+
+- With the XR Device Simulator running, tap G to pick up an item and tap G again to release it. SimulatorSupport applies XRI's toggle selection mode to the rig's NearFarInteractor hands at startup. The rig prefab retains its original physical-controller setting.
+- Updated the grab regression and the live diagnostic to check the first key-up and the second press. The test moves the hand after the first key-up and verifies that the donut follows. The Unity EditMode suite passed 40/40. In the live Main Game view, a G tap latched the donut, moving the mouse carried it, and a second G tap released it.
+
+## 2026-11-11 — tray pickup and rack alignment
+
+- The Main tray rack used a 22 cm source model with a 75 cm support collider. The trays settled on the collider and appeared to float above the visible rack. The rack prefab and its builder now fit the visible model to the support.
+- The tray exposes its own slightly taller grip collider, preserving the original bottom height. Dynamic grip attachment preserves the initial tray angle when the hand picks it up, and releasing the tray no longer adds a throw impulse. Its table socket still controls the placement pose.
+- A Main regression checks the shelf height, resting tray, actual controller-ray target, keyboard grip pickup, initial tray orientation and second-press release.
+
+## 2026-11-11 — front entrance to the patio
+
+- Main now leaves the opening immediately right of the donut display cases clear. The gameplay installer relocates Counter_A farther inside as a prep counter. It disables the original static instance so its collider and renderer cannot block the opening. The donut, drink and serving locations stay in place.
+- The imported shell has a 31 cm raised platform spanning the front. Its two replacement sections leave an 86 cm opening at floor level while supporting the displays on either side.
+- The display cases and fridge now use meshes from the original canteen model for collision. Copying the scene's MeshFilter at runtime could copy a combined static render mesh and create collision far outside the fixture.
+- A Main regression checks floor coverage and clearance along the new path and moves the rig's character controller out to the patio and back to the starting position.
