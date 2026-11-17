@@ -273,6 +273,16 @@ namespace CanteenRush.Gameplay.Desktop
             HideVrBoards();
             // The hand rides in front of the camera; when empty it points at the crosshair target.
             var ct = _cam.transform;
+            var held = Held;
+            if (held != null && held.GetComponent<Tray>() != null)
+            {
+                // A tray stays level and turns only with your heading: following the camera's pitch tipped it past
+                // the spill angle whenever you looked down at it. Right mouse still tilts it on purpose.
+                var heading = Quaternion.Euler(0, _yaw, 0);
+                if (!(Mouse.current != null && Mouse.current.rightButton.isPressed)) _tilt = Mathf.MoveTowards(_tilt, 0f, 120f * Time.unscaledDeltaTime);
+                _handRoot.SetPositionAndRotation(ct.position + heading * TrayHoldOffset, heading * Quaternion.Euler(0, 0, _tilt));
+                return;
+            }
             Vector3 pos = ct.TransformPoint(HoldFor(Held));
             Vector3 aimPoint = _hasAim ? _aim.point : ct.position + ct.forward * 3f;
             Vector3 fwd = aimPoint - pos; if (fwd.sqrMagnitude < .01f || Holding) fwd = ct.forward;
@@ -451,11 +461,16 @@ namespace CanteenRush.Gameplay.Desktop
             var body = target.GetComponent<Rigidbody>();
             if (body != null)
             {
-                Vector3 hold = _cam.transform.TransformPoint(HoldFor(target));
                 bool tray = target.GetComponent<Tray>() != null;
+                Vector3 hold = tray ? _cam.transform.position + Quaternion.Euler(0, _yaw, 0) * TrayHoldOffset : _cam.transform.TransformPoint(HoldFor(target));
                 if (body.isKinematic == false) { body.linearVelocity = Vector3.zero; body.angularVelocity = Vector3.zero; }
                 body.position = hold; target.transform.position = hold;
-                if (tray) { var flat = Quaternion.Euler(0, _yaw, 0); body.rotation = flat; target.transform.rotation = flat; }
+                if (tray)
+                {
+                    var flat = Quaternion.Euler(0, _yaw, 0); body.rotation = flat; target.transform.rotation = flat;
+                    // the tray grabs with a dynamic attach, so the hand must already be level or the offset bakes in a tilt
+                    _tilt = 0; _handRoot.SetPositionAndRotation(hold, flat);
+                }
                 Physics.SyncTransforms();
             }
             _mgr.SelectEnter((IXRSelectInteractor)_hand, (IXRSelectInteractable)target);
@@ -474,8 +489,8 @@ namespace CanteenRush.Gameplay.Desktop
             {
                 if (_traySlot != null) place = _traySlot.attachTransform != null ? _traySlot.attachTransform.position : _traySlot.transform.position;
                 else if (_serve != null) place = _serve.transform.position;
-                else if (held.GetComponent<CupFill>() != null && AimingAtCooler()) place = _cooler.TapPoint;
-                else if (_hasAim && _aim.normal.y > .5f) place = _aim.point + Vector3.up * (HalfHeight(held) + .02f);
+                else if (held.GetComponent<CupFill>() != null && AimingAtCooler()) place = RestOn(held, _cooler.TapPoint);
+                else if (_hasAim && _aim.normal.y > .5f) place = _aim.point + Vector3.up * (PivotAboveBottom(held) + .01f);
             }
             _mgr.SelectExit((IXRSelectInteractor)_hand, (IXRSelectInteractable)held);
             IgnorePlayer(held, false);
@@ -505,10 +520,26 @@ namespace CanteenRush.Gameplay.Desktop
                     foreach (var c in ((Component)food).GetComponentsInChildren<Collider>(true)) if (c != null) Physics.IgnoreCollision(c, _cc, ignore);
         }
 
-        static float HalfHeight(XRBaseInteractable it)
+        // Distance from the item's pivot down to its lowest collider point (pivots sit mid-item for donuts, at the base for cups).
+        static float PivotAboveBottom(XRBaseInteractable it)
         {
-            var c = it.GetComponentInChildren<Collider>();
-            return c != null ? c.bounds.extents.y : .05f;
+            float min = float.PositiveInfinity;
+            foreach (var c in it.GetComponentsInChildren<Collider>()) if (c != null && !c.isTrigger) min = Mathf.Min(min, c.bounds.min.y);
+            return float.IsPositiveInfinity(min) ? .05f : Mathf.Max(0f, it.transform.position.y - min);
+        }
+
+        // Drop straight down from a point onto whatever solid surface is below it, so the item never starts inside it.
+        static Vector3 RestOn(XRBaseInteractable it, Vector3 point)
+        {
+            var mine = it.GetComponentsInChildren<Collider>();
+            var hits = Physics.RaycastAll(point + Vector3.up * .3f, Vector3.down, 1.5f, ~0, QueryTriggerInteraction.Ignore);
+            float best = float.PositiveInfinity; Vector3 ground = point;
+            foreach (var h in hits)
+            {
+                if (System.Array.IndexOf(mine, h.collider) >= 0 || h.collider.attachedRigidbody != null && !h.collider.attachedRigidbody.isKinematic) continue;
+                if (h.distance < best) { best = h.distance; ground = h.point; }
+            }
+            return new Vector3(point.x, ground.y + PivotAboveBottom(it) + .005f, point.z);
         }
     }
 }

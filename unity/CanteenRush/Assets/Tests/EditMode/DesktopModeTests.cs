@@ -38,6 +38,23 @@ public sealed class DesktopModeTests
         return " | cam " + cam.position + " thing " + thing + " dist " + Vector3.Distance(cam.position, thing).ToString("F2") + " ray hits " + hit + " label '" + d.FocusLabel + "'";
     }
 
+    static string Diag(Tray tray)
+    {
+        var sb = new System.Text.StringBuilder();
+        foreach (var n in Object.FindObjectsByType<UnityEngine.XR.Interaction.Toolkit.Interactors.NearFarInteractor>(FindObjectsSortMode.None))
+        {
+            if (!n.isActiveAndEnabled) continue;
+            sb.Append(" | nf ").Append(n.name).Append(" rot ").Append(n.transform.rotation.eulerAngles)
+              .Append(" parent ").Append(n.transform.parent.name).Append(' ').Append(n.transform.parent.rotation.eulerAngles)
+              .Append(" attach ").Append(n.attachTransform.name).Append(' ').Append(n.attachTransform.rotation.eulerAngles)
+              .Append(" sel ").Append(n.hasSelection);
+        }
+        var g = tray.GetComponent<XRGrabInteractable>();
+        sb.Append(" | tray ").Append(tray.transform.rotation.eulerAngles).Append(" dyn ").Append(g.useDynamicAttach).Append(" mt ").Append(g.movementType)
+          .Append(" att ").Append(g.attachTransform != null ? g.attachTransform.localRotation.eulerAngles.ToString() : "null");
+        return sb.ToString();
+    }
+
     static DesktopController Prepare()
     {
         _original = InputSystem.settings;
@@ -113,6 +130,48 @@ public sealed class DesktopModeTests
         Assert.IsFalse(d.Holding, "E again drops it");
     }
 
+    [UnityTest] public IEnumerator FillingATrayOnTheRackLeavesItOnTheRack()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/Main.unity"); yield return new EnterPlayMode(); yield return null;
+        var d = Prepare(); yield return Ready(d);
+        var rig = Object.FindFirstObjectByType<ComfortSettings>().transform;
+        var tray = Object.FindFirstObjectByType<Tray>();
+        Assert.NotNull(tray);
+        { float t0 = Time.time; while (Time.time - t0 < .5f) yield return null; }   // let it settle on the rack
+        Vector3 home = tray.transform.position;
+        int placed = 0;
+        foreach (var food in Object.FindObjectsByType<ItemBehaviour>(FindObjectsSortMode.None))
+        {
+            if (placed == 4) break;
+            if (!food.gameObject.activeInHierarchy || food.Id != ItemId.Donut && food.Id != ItemId.Water) continue;
+            Assert.IsTrue(d.Grab(food.GetComponent<XRGrabInteractable>()), "grabbed " + food.name);
+            Face(d, rig, tray.transform.position, .9f);
+            yield return null; yield return null;
+            StringAssert.Contains("on the tray", d.FocusLabel, Probe(d, tray.transform.position));
+            yield return Tap(Key.E);
+            placed++;
+            float t0 = Time.time; while (Time.time - t0 < .4f) yield return null;
+        }
+        Assert.GreaterOrEqual(placed, 2, "found food to put on the tray");
+        { float t0 = Time.time; while (Time.time - t0 < 1.5f) yield return null; }
+        Assert.AreEqual(placed, tray.Contents.Count, "every item is held by a tray slot");
+        Assert.Less(Vector3.Distance(home, tray.transform.position), .05f, "the tray did not move on the rack");
+        Assert.Less(Vector3.Angle(tray.transform.up, Vector3.up), 3f, "the tray stayed flat");
+        // and it still carries: pick it up with the food on it
+        Face(d, rig, tray.transform.position, .9f);
+        yield return null; yield return null;
+        Assert.IsTrue(d.Grab(tray.GetComponent<XRGrabInteractable>()));
+        { float t0 = Time.time; while (Time.time - t0 < .5f) yield return null; }
+        Assert.AreEqual(placed, tray.Contents.Count, "the food rides along on the carried tray");
+        // looking down at the tray you carry must not tip it past the spill angle
+        var cam = Camera.main.transform;
+        d.LookAt(cam.position + rig.forward * .3f + Vector3.down * 1f);
+        { float t0 = Time.time; while (Time.time - t0 < 1f) yield return null; }
+        Assert.Less(Vector3.Angle(tray.transform.up, Vector3.up), 5f, "a carried tray stays level when you look down" + Diag(tray));
+        Assert.AreEqual(placed, tray.Contents.Count, "nothing spilled while looking down");
+        d.Drop(false);
+    }
+
     [UnityTest] public IEnumerator FridgeOpensWithEAndColaBecomesGrabbable()
     {
         EditorSceneManager.OpenScene("Assets/Scenes/Main.unity"); yield return new EnterPlayMode(); yield return null;
@@ -155,11 +214,11 @@ public sealed class DesktopModeTests
         yield return Tap(Key.E);
         Assert.IsFalse(d.Holding);
         Assert.Less(Vector3.Distance(cup.transform.position, cooler.TapPoint), .5f, "cup placed under the tap");
-        var body = cup.GetComponent<Rigidbody>(); body.isKinematic = true; // keep it under the spout for the check
+        for (int i = 0; i < 5; i++) yield return new WaitForFixedUpdate();   // let the cooler's trigger see the cup
         float before = cup.Level;
         Keys(Key.F);
         float deadline = Time.time + 2f;
-        while (cup.Level <= before + .01f && Time.time < deadline) yield return null;
+        while (cup.Level <= before + .01f && Time.time < deadline) { Keys(Key.F); yield return null; }
         Keys();
         Assert.Greater(cup.Level, before, "holding F pumps water into the cup");
     }
