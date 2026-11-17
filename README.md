@@ -20,22 +20,25 @@ Output: `Builds/CanteenRush/CanteenRush.exe` (git-ignored, about 107 MB).
 
 **Tests:** Window > General > Test Runner. EditMode = P2's logic and gameplay tests; PlayMode = P3's smoke tests (scene loads, scripted round, cue/preset coverage, leaks, subscriptions).
 
-## Controls (XR Device Simulator, keyboard and mouse)
+## Controls
+
+**Desktop mode (default on PC, no VR needed):** first-person keyboard and mouse. One invisible hand follows the camera and grabs through the same XR interactables, so audio, haptics and scoring behave exactly as in VR. Press **F5** to switch to the XR Device Simulator.
+
 | Action | Keys |
 |---|---|
-| Look around | hold right mouse button and move the mouse |
-| Move (continuous, left stick) | W A S D |
-| Choose controller | Tab cycles; Y = right controller, T = left (see the simulator's on-screen help) |
-| Grab (grip) | G (hold) |
-| Trigger (pump, UI click) | left mouse button with a controller selected |
-| Snap turn | right stick via the simulator (45° steps) |
-| Start / replay round | point at **Play** / **Replay** and pull the trigger (fallback key: Enter) |
-| Back to menu | **Menu** on the results board (fallback key: F8) |
-| Seated / teleport toggles | menu board buttons (fallback keys: F6 / F7) |
-| Haptics debug HUD | F9 (shows every pulse: colour = preset, size = strength, fade = length) |
-| Sandbox_P3 debug panel | F10; turn the head with arrow keys or Q/E to hear direction |
+| Walk / sprint | W A S D / Shift |
+| Look | mouse |
+| Grab or drop what the crosshair is on | left click or **E** (drop "smart-places" on the tray, under the tap, or on the customer table) |
+| Serve | carry the tray, put the crosshair on the customer, click or **E** |
+| Open / close the fridge | click or **E** on the door |
+| Pump water | set a cup under the tap, hold **F** |
+| Tilt the tray | hold right mouse while carrying, then move the mouse |
+| Start / replay the round | **Enter** |
+| Pause / menu | **Esc** (then **M** for the menu) |
+| Controls overlay / haptics HUD | **F1** / **F9** |
+| Switch to the VR simulator | **F5** |
 
-The simulator cannot vibrate a controller; the haptics HUD stands in for it. Headphones recommended for the spatial audio.
+**XR Device Simulator (F5):** hold right mouse to look, W A S D to move, Y/T/Tab to pick a controller, **G** toggles grab, left click is the trigger, F6/F7 seated/teleport, F8 menu. The simulator cannot vibrate a controller; the haptics HUD stands in for it. Headphones recommended for the spatial audio.
 
 ## How it is built
 

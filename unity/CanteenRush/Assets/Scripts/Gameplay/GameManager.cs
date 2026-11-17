@@ -20,6 +20,9 @@ namespace CanteenRush.Gameplay
         int _tutorialStep;
         bool _tutorialSeen, _finishTutorial, _retryTutorial;
         public RoundState State { get; private set; } = RoundState.Boot;
+        public GameConfig Config => _config;
+        public OrderService Orders => _orders;
+        public ScoreService Score => _score;
         public float Remaining => _wave == null ? _config.RoundSeconds : Mathf.Max(0, _config.RoundSeconds - _wave.Elapsed);
         public bool IsPlaying => State == RoundState.Wave1 || State == RoundState.Wave2 || State == RoundState.Wave3;
         void Awake() { _sun = FindFirstObjectByType<SunCycle>(); }

@@ -24,6 +24,22 @@ namespace CanteenRush.Gameplay
         void Press(ActivateEventArgs args) { if (_pressed) return; _pressed = true; GameEvents.PumpActivated(true, _pump.transform.position); }
         void Release(DeactivateEventArgs args) { ResetPump(); }
         void Exit(SelectExitEventArgs args) { ResetPump(); }
+        /// Desktop mode: hold-to-pump without needing a second virtual hand on the pump lever.
+        public void SetPump(bool on)
+        {
+            if (on) { if (_pressed) return; _pressed = true; GameEvents.PumpActivated(true, _pump.transform.position); }
+            else ResetPump();
+        }
+        public bool Pumping => _pressed;
+        /// Where a cup sits to catch water: low in the trigger volume that finds cups.
+        public Vector3 TapPoint
+        {
+            get
+            {
+                foreach (var c in GetComponentsInChildren<Collider>(true)) if (c.isTrigger) return c.bounds.center - Vector3.up * c.bounds.extents.y * .6f;
+                return _pump.transform.position + Vector3.down * .25f;
+            }
+        }
         public void ResetPump() { if (!_pressed) return; _pressed = false; GameEvents.PumpActivated(false, _pump.transform.position); }
         void OnTriggerEnter(Collider other) { var cup = other.GetComponentInParent<CupFill>(); if (cup != null) _cups[other] = cup; }
         void OnTriggerExit(Collider other) { _cups.Remove(other); }

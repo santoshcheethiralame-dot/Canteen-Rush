@@ -96,7 +96,7 @@ namespace CanteenRush.World.Editor
                 if (t != null) { m.SetTexture("_BaseMap", t); m.SetColor("_BaseColor", new Color(0.75f, 0.75f, 0.75f, alpha)); }
             }
 
-            bool emissive = (d.emission != null && d.emission.Length >= 3 && d.emission[0] + d.emission[1] + d.emission[2] > 0.01f) || key == "Env_Canteen/light";
+            bool emissive = (d.emission != null && d.emission.Length >= 3 && d.emission[0] + d.emission[1] + d.emission[2] > 0.01f && d.emission_strength > 0.01f) || key == "Env_Canteen/light";
             if (emissive)
             {
                 Color e = key == "Env_Canteen/light" ? new Color(1f, 0.82f, 0.55f) * 1.6f : new Color(d.emission[0], d.emission[1], d.emission[2]).gamma * Mathf.Max(d.emission_strength, 1f);
