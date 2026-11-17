@@ -2,14 +2,14 @@
 
 P1 owns the **world, the lighting and the performance numbers**. In the 4-minute demo (`docs/DEMO_GUIDE.md`) that is three beats: the opening line, the patio/lighting beat at **3:10** and the performance close at **3:30**. This file gives the exact words for those, a 90-second solo walkthrough for the viva, and the facts you must be able to defend. Numbers are from `docs/PERF_REPORT.md` (Windows player build, Intel Iris Xe, 1600x900, mono).
 
-Controls while you drive (desktop mode): **W A S D** walk, mouse look, **Shift** sprint, **F1** hides the key list, **F5** swaps to the VR simulator.
+Controls while you drive (desktop mode): **W A S D** walk, mouse look, **Shift** run, **Esc** pause, **F1** shows or hides the key list, **F5** swaps to the VR simulator. Full controls: `docs/DEMO_GUIDE.md` §3.
 
 ---
 
 ## 1. Your beats inside the team demo
 
-### 0:00 — Opening (30 seconds, you speak while the menu board is on screen)
-**Do:** menu board visible, do nothing yet.
+### 0:00 — Opening (30 seconds, you speak while the title card is on screen)
+**Do:** title card visible ("Press ENTER to play"), do nothing yet.
 **Say:** "Canteen Rush is set on the roof deck of the 13th floor of our campus, about 42 metres up. The whole world was built from seven Blender files of about 7 million triangles, cleaned, rescaled and rebuilt in Unity for a Quest-class budget. I will come back to the lighting and the numbers at the end."
 
 ### 2:20 — Door crossing (one line, supports the audio beat)
